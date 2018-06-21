@@ -1,0 +1,18 @@
+<div>
+  <!-- <h3 mat-dailog-title>Dialog: mat-dialog</h3> -->
+
+  <mat-dialog-content>{{dialogMessage}}</mat-dialog-content>
+
+  <mat-dialog-actions>
+
+    <!-- Option 1 -->
+    <!-- <button mat-button [mat-dialog-close]="true">Yes</button>
+  <button mat-button [mat-dialog-close]="false">No</button>  -->
+
+    <!-- Optino 2: Using MatDialogRef<DialogComponent>
+-->
+    <button mat-button (click)="closeWithResponse()">Yes</button>
+    <button mat-button (click)="closeWithoutResponse()">No</button>
+
+  </mat-dialog-actions>
+</div>

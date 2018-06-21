@@ -1,0 +1,118 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" *ngIf="fooditem as fi">
+
+  <!-- <div>
+    <button mat-raised-button routerLink="/product/chat/{{fooditem.id}}">LiveChat
+    </button>
+  </div> -->
+
+  <div>
+    <mat-card *ngIf="fooditem as fi" style="max-width:380px; padding-bottom: 0">
+
+      <div *ngIf="preview">
+        <img mat-card-image [src]="preview" style="height: 220px">
+
+        <mat-grid-list *ngIf="fooditemImageCount > 1" cols="4">
+          <mat-grid-tile *ngFor="let img of fi.images">
+            <img mat-card-image [src]="img.url" (click)="preview = img.url">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div fxLayout="row wrap">
+        <!-- <h3 fxFlex="0 1 50" [style.color]="fi.isNonVeg? 'red':'green'">{{fi.title}}</h3>
+        <span class="spacer"></span> -->
+
+        <!-- <h3>
+              <mat-icon>attach_money</mat-icon>
+          </h3> -->
+        <h3>SGD {{fi.price}}</h3>
+
+      </div>
+
+      <mat-card-content>
+        <h3>[{{fi.category}}] . [{{fi.cuisine}}]</h3>
+        <h3>Availability: [{{ fi.availability }}]</h3>
+
+      </mat-card-content>
+
+      <div fxLayout="row wrap">
+        <h3>
+          <mat-icon>room_service</mat-icon>
+        </h3>
+        <h3>{{fi.serving}} persons</h3>
+
+        <span class="spacer"></span>
+
+        <h3>
+          <mat-icon>schedule</mat-icon>
+        </h3>
+        <h3> {{fi.orderTime}} {{fi.orderType == 'instant'? 'minutes':'hours'}} </h3>
+
+        <span class="spacer"></span>
+
+        <h3>
+          <mat-icon>place</mat-icon>
+        </h3>
+        <h3>1.0 km</h3>
+      </div>
+
+    </mat-card>
+  </div>
+
+
+  <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 32" fxFlexOrder.xs="2">
+    <h3>Payment and delivery options</h3>
+    <mat-selection-list>
+      <mat-list-option [selected]="fi.cashOnDelivery">
+        Cash of delivery
+      </mat-list-option>
+      <mat-list-option [selected]="fi.onlinePayment">
+        Pay online
+      </mat-list-option>
+      <mat-list-option [selected]="fi.takeAway">
+        Take away
+      </mat-list-option>
+      <mat-list-option [selected]="fi.homeDelivery">
+        Home delivery
+      </mat-list-option>
+      <mat-list-option [selected]="fi.dineIn">
+        Dine in
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card>
+
+
+  <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 32" fxFlexOrder.xs="4">
+    <h3>Ratings and reviews</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let i of [1,2,3,4,5]">
+        {{i}} Awsome food!
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 98" fxFlexOrder.xs="3">
+    <mat-card-header>
+      <div mat-card-avatar [style.background-image]="'url('+ fi.images[0] +')'" [style.background-size]="'cover'"></div>
+      <mat-card-title>Ambikesh</mat-card-title>
+      <mat-card-subtitle>{{fi.autoAddressFromMap}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>Hello food lover! Serving you authentic north indian food. Please check my other food posts as well.</mat-card-content>
+    <h3>More from Ambikesh</h3>
+
+    <!-- <mat-grid-list cols="3">
+      <mat-grid-tile *ngFor="let fooditem of fooditems$|async">
+        <img mat-card-image [src]="fooditem.images[0]">
+      </mat-grid-tile>
+    </mat-grid-list> -->
+
+  </mat-card>
+
+  <app-fab-action [fabIcon]="fabActionIcon" (click)="onClickFab(fabActionIcon)"></app-fab-action>
+
+  <!-- <button mat-fab style="position: fixed; bottom: 20px; right: 20px;">
+    <mat-icon>shopping_basket</mat-icon>
+  </button> -->
+
+
+</div>

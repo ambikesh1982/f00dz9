@@ -1,0 +1,43 @@
+<div [formGroup]="productForm">
+  <form fxLayout="column" formGroupName="form2">
+
+    <h3>Order type</h3>
+    <mat-radio-group fxLayout="row" fxLayoutAlign="space-between" (change)="setOrderBeforeRange($event.value)" formControlName="orderType">
+      <mat-radio-button value="instant">Instant</mat-radio-button>
+      <mat-radio-button value="preOrder">Pre-Order</mat-radio-button>
+    </mat-radio-group>
+
+    <br>
+    <div>
+      <mat-slider style="width: 100%" formControlName="orderTime" [max]="orderTimeSliderRange" [step]="orderTimeSliderStep" [tickInterval]="orderTimeSliderStep"
+        [value]="orderTimeSliderValue" thumbLabel=true>
+        Delivery time
+      </mat-slider>
+      <h3>
+        Order before:
+        <span style="color: teal">[ {{this.orderTimeSliderValue}}/{{orderTimeUnit}} ]</span>
+      </h3>
+    </div>
+
+    <h3>Availability</h3>
+    <mat-form-field>
+      <mat-select placeholder="Days of Week" multiple formControlName="availability">
+        <mat-option *ngFor="let day of daysOfWeek; let i=index" [value]="day">{{day}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h3>Delivery options</h3>
+    <mat-list>
+      <mat-list-item>
+        <mat-checkbox formControlName="takeAway">Take away</mat-checkbox>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-checkbox formControlName="homeDelivery">Home delivery</mat-checkbox>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-checkbox formControlName="dineIn">Dine in</mat-checkbox>
+      </mat-list-item>
+    </mat-list>
+
+  </form>
+</div>

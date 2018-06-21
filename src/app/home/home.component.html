@@ -1,0 +1,46 @@
+<div fxLayout="column" fxLayoutAlign="center stretch">
+  <mat-card>
+    <div fxLayout="row">
+      <mat-icon color="primary" style="font-size: 96px">search</mat-icon>
+      <h2 style="margin-left: 65px">Hungry?</h2>
+    </div>
+
+    <h3>Find the food served by home chefs in our neighbourhood!</h3>
+    <!-- <br> -->
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Tell us your location!</mat-label>
+      <input matInput type="text" required />
+      <!-- <button mat-icon-button matSuffix mat-icon-button (click)="value=''"> -->
+      <!-- <mat-icon style="font-size: 36px">arrow_forward</mat-icon> -->
+      <!-- </button> -->
+    </mat-form-field>
+
+    <mat-card-actions align="right">
+      <a mat-icon-button routerLink="/">
+        <mat-icon color="primary" style="font-size: 48px; margin-right: 24px">arrow_forward</mat-icon>
+      </a>
+    </mat-card-actions>
+
+  </mat-card>
+  <mat-divider></mat-divider>
+
+  <!-- <br> -->
+
+  <mat-card>
+
+    <div fxLayout="row">
+      <mat-icon color="accent" style="font-size: 96px">room_service</mat-icon>
+      <h2 style="margin-left: 65px">Post your delicacy.</h2>
+      <!-- <span class="spacer"></span> -->
+    </div>
+    <h3>Become a Home Chef.</h3>
+    <h3>Create your profile and setup your kitchen!</h3>
+
+    <mat-card-actions align="right">
+      <a mat-icon-button routerLink="/manage/new-product">
+        <mat-icon color="accent" style="font-size: 48px; margin-right: 24px">arrow_forward</mat-icon>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>

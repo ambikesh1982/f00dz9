@@ -1,0 +1,21 @@
+<div [formGroup]="productForm">
+  <mat-card>
+
+    <form fxLayout="column" fxLayoutAlign="center stretch" formGroupName="addressForm">
+
+      <mat-form-field style="width: 100%" class="product-full-width" appearance="outline">
+        <mat-label>Search your location on the map</mat-label>
+        <input matInput type="textarea" #addessSearch formControlName="autoAddressFromMap">
+      </mat-form-field>
+
+      <mat-form-field class="product-full-width" appearance="outline">
+        <mat-label>Additional Address</mat-label>
+        <input matInput type="text" formControlName="addressFromUser">
+      </mat-form-field>
+
+    </form>
+
+    <div #gmap style="height: 220px;"></div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,75 @@
+<mat-sidenav-container>
+
+  <mat-sidenav class="sidenav" #sidenav mode="over" fixedInViewport="true" style="width:300px">
+
+    <mat-toolbar color="primary">Foodz9</mat-toolbar>
+
+
+    <mat-card 
+      *ngIf="(currentUser$|async) as currentUser; else notLogedIn" 
+      class="user-card" 
+      style="background-color: orange">
+
+      <div *ngIf="currentUser.isAnonymous else registeredUser">
+        <mat-card-title>Welcome Guest!</mat-card-title>
+
+        <mat-card-actions>
+          <button bmat-raised-button color="primary" (click)="loginGoogle()">
+            Login with Google
+          </button>
+        </mat-card-actions>
+      </div>
+
+      <ng-template #registeredUser>
+        <mat-card-title>{{currentUser.displayName}}</mat-card-title>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="sidenav.close() && signOut()">
+            Sign-out
+          </button>
+        </mat-card-actions>
+      </ng-template>
+
+    </mat-card>
+
+    <ng-template #notLogedIn>
+      <mat-card class="user-card" style="background-color: orange">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="sidenav.close() && loginGoogle()">
+            Sign in with Google
+          </button>
+        </mat-card-actions>
+        <mat-card-title>
+          Continue as guest!.
+        </mat-card-title>
+        <mat-card-actions align="right">
+          <button mat-icon-button color="primary" (click)="loginAsGuest()">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+
+
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item *ngFor="let navItem of navList" [routerLink]="navItem.menuRoute" (click)="sidenav.close()">
+        <mat-icon matListIcon>{{navItem.menuIcon}}</mat-icon>
+        {{navItem.menuName}}
+      </a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content fxLayout="column" style="margin-top: 60px">
+
+    <app-toolbar  class="mat-elevation-z4" [sidenavRef]=sidenav></app-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<!-- <app-footer-toolbar style="position: fixed; width: 100%; bottom: 0; z-index: 1"></app-footer-toolbar> -->

@@ -1,0 +1,30 @@
+<!-- <app-product-new [fooditemToBeModified]="tempFooditem"></app-product-new>
+<app-fab-action fabIcon="done" (click)="createOrUpdateProduct()"></app-fab-action> -->
+<!-- [linear]="true" -->
+<div>
+  <mat-horizontal-stepper style="padding: 0px" #stepper>
+
+    <mat-step [completed]="imageUploadCompleted">
+      <app-image-upload #upload [fooditem]="tempFooditem" (imageUploaded)="imagesFromImageUpload($event)"></app-image-upload>
+    </mat-step>
+
+    <mat-step [completed]="productForm.get('form1').status == 'VALID'">
+      <app-form1 [productForm]="productForm"></app-form1>
+    </mat-step>
+
+    <mat-step [completed]="productForm.get('form1').status == 'VALID'">
+      <app-form2 [productForm]="productForm"></app-form2>
+    </mat-step>
+
+    <mat-step [completed]="addressFormCompleted">
+      <app-auto-address [productForm]="productForm" [userGeoInfo]="currentAppUser.geoInfo">
+      </app-auto-address>
+      <!-- <app-preview *ngIf="newFooditem.coordinates" [fooditem]="newFooditem"></app-preview> -->
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+  <app-fab-action [fabIcon]="stepper.selectedIndex == 3? 'done':'arrow_forward'" (click)="stepper.selectedIndex == 3 ?createOrUpdateProduct():stepper.next()">
+  </app-fab-action>
+
+</div>

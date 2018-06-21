@@ -1,0 +1,65 @@
+<mat-toolbar 
+  style="background-color: #fff"
+  fxLayout="row wrap" 
+  *ngIf="layoutService.appToolBar$|async as customeToobar">
+
+  <div>
+    <button 
+      *ngIf="customeToobar.showSideNavToggleIcon" 
+      mat-icon-button 
+      (click)="sidenavRef.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <button 
+      *ngIf="customeToobar.showGoBackIcon" 
+      mat-icon-button 
+      (click)="goBack()">
+      <mat-icon>arrow_backword</mat-icon>
+    </button>
+
+  </div>
+
+  <div>
+    <span *ngIf="customeToobar.pageTitle">{{customeToobar.pageTitle}} </span>
+    <!-- <span *ngIf="cartSize">({{cartSize}})</span> -->
+  </div>
+  
+  <span class="spacer"></span>
+
+  <div>
+    <a 
+      *ngIf="customeToobar.showNewProductIcon" 
+      mat-icon-button 
+      routerLink="/manage/new-product">
+      <mat-icon>add</mat-icon>
+    </a>
+
+    <a 
+      *ngIf="customeToobar.showAppTrayIcon" 
+      mat-icon-button 
+      routerLink="/app-cart">
+      <mat-icon 
+        [matBadge]="cartSize"
+        matBadgeSize="medium"
+        matBadgeColor="accent"
+        [matBadgeHidden]="this.hideCartBadge">
+        add_shopping_cart
+      </mat-icon>
+    </a>
+
+    <a *ngIf="customeToobar.showUserIcon" 
+        mat-icon-button routerLink="/app-user">
+      <mat-icon>person</mat-icon>
+    </a>
+
+    <a 
+      *ngIf="customeToobar.showCancelIcon" 
+      mat-icon-button 
+      routerLink="/">
+      <mat-icon>clear</mat-icon>
+    </a>
+
+  </div>
+
+</mat-toolbar>
