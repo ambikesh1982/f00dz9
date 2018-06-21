@@ -1,0 +1,40 @@
+<mat-card 
+  *ngIf="(currentUser$|async) as currentUser; else notLogedIn" 
+  class="user-card" 
+  style="background-color: orange">
+
+  <div *ngIf="currentUser.isAnonymous else registeredUser">
+      <button mat-raised-button color="primary" (click)="loginGoogle()">
+        Login with Google
+      </button>
+    </div>
+
+  <ng-template #registeredUser>
+    <mat-card-title>{{currentUser.displayName}}</mat-card-title>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="signOut()">
+        Sign-out
+      </button>
+    </mat-card-actions>
+  </ng-template>
+  
+  </mat-card>
+
+
+<!-- Template for Not logged-in User -->
+<ng-template #notLogedIn>
+  <mat-card class="user-card" style="background-color: orange">
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="loginGoogle()">
+        Sign in with Google
+      </button>
+    </mat-card-actions>
+    <mat-card-title> Continue as guest!. </mat-card-title>
+    <mat-card-actions align="right">
+      <button mat-icon-button color="primary" (click)="loginAsGuest()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
