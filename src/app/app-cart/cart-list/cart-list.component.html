@@ -1,0 +1,25 @@
+<!-- <p *ngFor="let item of items$|async">{{item|json}}</p> -->
+
+
+
+<mat-list>
+  <mat-list-item *ngFor="let item of items$|async">
+
+    <img matListAvatar [src]="item.url" alt="...">
+
+    <h4 mat-line>{{item.title}}</h4>
+    <p mat-line> SGD {{item.price}} </p>
+    <p mat-line>Total: SGD {{item.price * item.qty}}</p>
+
+    <button mat-icon-button (click)="updateQty(item, -1)">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span>{{item.qty}}</span>
+    <button mat-icon-button (click)="updateQty(item, 1)">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-icon color="accent" (click)="removeItem(item)">cancel</mat-icon>
+
+  </mat-list-item>
+</mat-list>

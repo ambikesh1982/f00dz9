@@ -116,8 +116,7 @@ export class ImageUploadComponent implements OnInit, OnChanges, OnDestroy {
     // Pass imagesAdded[]   on product cancle action.
     console.log(' #### Cleanup: Free storage for these images ####');
     images.forEach(image => {
-      // this.storage.ref(image.path).delete();
-      console.log(image);
+      this.storage.ref(image.path).delete();
     });
   }
 

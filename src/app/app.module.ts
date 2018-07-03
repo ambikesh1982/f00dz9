@@ -21,6 +21,8 @@ import { ProductResolver } from './core/product.resolver';
 import { ScriptLoadService } from './core/script-load.service';
 import { CanDeactivateGuard } from './core/can-deactivate-guard';
 import { LocationService } from './core/location.service';
+import { AppCartService } from './app-cart/app-cart.service';
+import { ChatService } from './app-chat/chat.service';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { LocationService } from './core/location.service';
     ProductResolver,
     ScriptLoadService,
     LocationService,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    AppCartService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

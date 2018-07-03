@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// tslint:disable-next-line:import-blacklist
 import { Observable ,  of, BehaviorSubject, combineLatest } from 'rxjs';
 
 import { Fooditem } from './models';
@@ -20,22 +19,22 @@ export class ProductService {
     this.vegNonvetFilter$.next(null);
     this.cuisineFilter$.next(null);
     this.distanceFilter$.next(null);
-    this.getProducts();
+    // this.getProducts();
    }
 
-   getProducts() {
-     this.products$ = combineLatest(
-       this.distanceFilter$
-     ).pipe(
-       switchMap(distance =>
-        this.firestore.collection('collection_path', ref => {
-          let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-          if (distance) { query = query.where('distance', '==', distance); }
-          return query;
-        }).valueChanges()
-       )
-     );
-   }
+  //  getProducts() {
+  //    this.products$ = combineLatest(
+  //      this.distanceFilter$
+  //    ).pipe(
+  //      switchMap(distance =>
+  //       this.firestore.collection('collection_path', ref => {
+  //         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+  //         if (distance) { query = query.where('distance', '==', distance); }
+  //         return query;
+  //       }).valueChanges()
+  //      )
+  //    );
+  //  }
 
    filterByDistance(distance: number|null) {
     this.distanceFilter$.next(distance);

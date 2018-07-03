@@ -64,7 +64,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       // Initialize new fooditem.
       this.tempFooditem = {
         id: this.dataService.getFirebaseDocumentKey(),
-        createdBy: this.currentAppUser.uid,
+        createdBy: {id: this.currentAppUser.uid, name: this.currentAppUser.displayName, photoUrl: this.currentAppUser.photoURL},
         images: [],
         availability: [],
         geoInfo: {},
@@ -182,20 +182,19 @@ export class ManageComponent implements OnInit, OnDestroy {
 
 
   createFooditem(fooditem: Fooditem) {
-    if (!this.currentAppUser.geoInfo) {
-      this.updateUserGeoInfo(this.currentAppUser.uid, fooditem.geoInfo);
-    }
-
     console.log('Fooditem to be saved >>>> ', fooditem);
     this.dataService.createProduct(fooditem, fooditem.id).then(
-      rep => {
+      () => {
+        if (!this.currentAppUser.geoInfo) {
+          this.updateUserGeoInfo(this.currentAppUser.uid, fooditem.geoInfo);
+        }
         this.canNavigateAway = true;
         this.router.navigate(['/']);
       },
     );
   }
 
-  replaceFooditem(fooditem: Fooditem) {
+  updateFooditem(fooditem: Fooditem) {
     this.dataService.updateProduct(fooditem).then(
       rep => {
         console.log('#### Fooditem updated successfully #### ', fooditem);
@@ -219,7 +218,14 @@ export class ManageComponent implements OnInit, OnDestroy {
       } else {
         console.log('Modify existing fooditem: ', this.tempFooditem);
         const modifiedFooditem = this.prepareFooditem(this.tempFooditem, this.productForm);
-        this.replaceFooditem(modifiedFooditem);
+        this.updateFooditem(modifiedFooditem);
+        // if (modifiedFooditem !== this.fooditem) {
+        //   this.updateFooditem(modifiedFooditem);
+        // } else {
+        //   console.log('No changes made: Do not update ');
+        //   this.canNavigateAway = true;
+        //   this.router.navigate(['/']);
+        // }
       }
     }
   }

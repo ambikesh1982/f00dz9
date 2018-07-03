@@ -1,0 +1,259 @@
+.speech-bubble {
+    margin: 25px;
+    padding: 20px;
+    position: relative;
+    word-break: keep-all;
+}
+.speech-bubble:after {
+   content: "";
+   position: absolute;
+   top: 500%;
+   left: 20px;
+   border-top: 20px solid black;
+   border-top-color: inherit; 
+   border-left: 20px solid transparent;
+   border-right: 20px solid transparent; 
+}
+
+.send { background: grey}
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+    float: left;
+    color: #999;
+}
+.messages-container {
+  position: relative;
+  height: 100%;
+}
+
+.inner {
+  overflow: auto;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  //gotta hide windows scrollbars
+
+  &::-webkit-scrollbar {
+    width: 0 !important
+  }
+
+  .content {
+    padding: 12px 18px 0;
+    position: relative;
+    margin: 0;
+    box-sizing: border-box;
+
+    :first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.bottom {
+  /*
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  */
+  position: relative;
+  height: 64px;
+  background: #CCCCCC;
+
+  /* box-shadow: 0px -3px 3px 0px rgba(50, 50, 50, 0.1); */
+
+  #new-post-input {
+    display: none;
+  }
+  .preview {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    height: 0;
+    transition: .2s height ease-in-out;
+    max-height: 0;
+    background-color: #CCCCCC;
+
+    img {
+      display: none;
+      height: 200px;
+      width: auto;
+    }
+
+    &.open {
+      display: flex;
+      height: 240px;
+      max-height: 240px !important;
+
+      img {
+        display: inline-block;
+      }
+    }
+  }
+
+  .input-buffer {
+    .mat-button {
+      color: rgba(0, 0, 0, .87);
+      text-transform: uppercase;
+    }
+  }
+
+  .input {
+    height: 64px;
+    background: #CCCCCC;
+    border: none;
+    resize: none;
+    overflow: scroll;
+    padding: 24px 12px;
+    font-weight: 300;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+    }
+
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    //gotta hide windows scrollbars
+
+    &::-webkit-scrollbar {
+      width: 0 !important
+    }
+  }
+
+  .upload, .send {
+    color: rgba(255, 255, 255, 1);
+    margin: 0 12px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &[disabled] {
+      background: #AAA;
+    }
+  }
+
+  .send {
+    background: #F44336;
+  }
+
+  &.m2app-dark {
+    background: #696c75;
+
+    .input, .preview {
+      background: #696c75;
+    }
+    .input-buffer {
+      .mat-button {
+        color: rgba(255, 255, 255, .87);
+      }
+    }
+  }
+}
+
+.message-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  margin: 0;
+  padding: 12px 0;
+  font-family: 'Open Sans', sans-serif;
+
+  .circle-wrapper {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+  }
+
+  .text-wrapper {
+    padding: 12px;
+    min-height: 42px;
+    width: 60%;
+    margin: 0 12px;
+    box-shadow: 0 1px 0 0 rgba(50, 50, 50, 0.3);
+    border-radius: 2px;
+    font-weight: 300;
+    position: relative;
+    /* word-break: break-all; */
+    /*opacity: 0;*/
+
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &.them {
+    .circle-wrapper, .text-wrapper {
+      background-color: #F44336;
+      float: left;
+      color: #ffffff;
+    }
+
+    .text-wrapper {
+      &:before {
+        border-width: 0 10px 10px 0;
+        border-color: transparent #F44336 transparent transparent;
+        position: absolute;
+        top: 0;
+        left: -9px;
+      }
+    }
+  }
+
+  &.me {
+    .circle-wrapper,
+    .text-wrapper {
+      background-color: #FF5722;
+      float: right;
+      color: #333333;
+    }
+
+    .circle-wrapper {
+      display: none;
+    }
+
+    .text-wrapper {
+      background: #ffffff;
+
+      &:before {
+        border-width: 10px 10px 0 0;
+        border-color: #ffffff transparent transparent transparent;
+        position: absolute;
+        top: 0;
+        right: -9px;
+      }
+    }
+  }
+}

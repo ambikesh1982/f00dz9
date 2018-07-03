@@ -56,7 +56,8 @@ export class AuthService {
         const anomymousUser: AppUser = {
           uid:          credential.user.uid,
           isAnonymous:  credential.user.isAnonymous,
-          displayName:  'Guest'
+          displayName:  'Guest',
+          photoURL: 'anonymous-user'
         };
 
         // Save user data to fireabase...

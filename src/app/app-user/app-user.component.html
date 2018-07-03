@@ -1,0 +1,56 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" *ngIf="user|async as user">
+            <mat-card style="max-width:380px; padding-bottom: 0">
+                <span class="spacer"></span>
+                <img  class = "center" mat-card-image src= {{user.photoURL}}>
+                <div fxLayout="row wrap">
+                    <mat-card-title >{{user.displayName}}</mat-card-title>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-card-subtitle>Speciality - North Indian Cuisines </mat-card-subtitle>
+                </div>
+        </mat-card>
+        <span class="spacer"></span>
+        <mat-card style="max-width:380px; padding-bottom: 0">
+            <mat-card-title>
+                <h3>Contacts</h3>
+            </mat-card-title>
+            <div fxLayout="row wrap">
+                <h4>
+                <mat-icon>home</mat-icon>
+                </h4>
+                <h4>02-02, 22 Sing Ming Walk, Singapore</h4>
+            </div>
+            <span class="spacer"></span>
+            <div fxLayout="row wrap">
+                <h4>
+                <mat-icon>email</mat-icon>
+                </h4>
+                <h4> {{user.email  }}</h4>
+                <span class="spacer"></span>
+            </div>
+        </mat-card>
+        <mat-card style="max-width:380px; padding-bottom: 0">
+            <mat-card-title>
+                <h3>Products & Likes</h3>
+            </mat-card-title>
+            
+            <span class="spacer"></span>
+            <div fxLayout="row wrap">
+        
+            <mat-card-content>
+                <h4>User-Chats</h4>
+            </mat-card-content>
+            </div>
+            <mat-list *ngFor="let metaData of ChatMetaData$|async">
+        <mat-card>
+            <img  
+            style="max-width:120px; position: absolute" align="left"
+            mat-card-image src= {{metaData.imageURL}}>
+            <div align="right">
+            <a mat-button (click)=getMessage(metaData) align="right" routerLink="/chat/{{metaData.fooditemID}}"> 
+            {{metaData.buyerName}}
+            </a>
+            </div>
+        </mat-card>
+            </mat-list>
+        </mat-card>

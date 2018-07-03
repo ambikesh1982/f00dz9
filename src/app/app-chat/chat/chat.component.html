@@ -1,0 +1,37 @@
+
+
+
+  <div> 
+  <div  class="speech-bubble" 
+        style="border-color: #7c7fbc; background: #7c7fbc;  color: white" 
+        *ngFor="let msg of chatMessages$|async">
+    {{msg.message}}
+  </div>
+  </div>
+
+  <!--<div *ngIf="isSeller">
+    <div class="speech-bubble" 
+          style="border-color: #7c7fbc; text-align:right; background: #7c7fbc; color: white" 
+          *ngFor="let msg of chatMessages$|async">
+      {{msg.message}}
+    </div>
+  </div>
+
+  <!--<div id="inner" class="inner" fxFlex>
+    <div class="content">
+      <div class="message-wrapper" class="container" *ngFor="let msg of chatMessage">
+        <div class="peech-bubble" >{{msg.message}}</div>
+        <!-- <span class="time-right">{{(msg.createdAt)|date:'shorttime'}}</span> 
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="bottom" id="bottom" *ngIf="true" fxLayout="row" fxLayoutAlign="start center">
+    <textarea class="input" id="message-text-input" fxFlex title="New message text" [(ngModel)]="inputMessageText" (keydown.enter)="sendRoomMessage($event)">
+        </textarea>
+
+    <button mat-icon-button class="send" [disabled]="!inputMessageText" (click)="sendRoomMessage($event)">
+        <mat-icon>send</mat-icon>
+      </button>
+  </div>

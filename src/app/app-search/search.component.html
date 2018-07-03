@@ -1,0 +1,38 @@
+<div fxLayout="column">
+
+  <!-- <mat-slider style="width: 100%" value="2" max="10" min="0" thumbLabel="true" tickInterval="1">
+  </mat-slider>
+  <app-show-gmap [lat]="locationFromNavigator.lat" [lng]="locationFromNavigator.lng"></app-show-gmap> -->
+  
+  <mat-card>
+    <mat-slide-toggle fxFlex="0 1 48" matInput>Veg / Non-Veg</mat-slide-toggle>
+
+    <mat-grid-list cols="3" gutterSize="1px">
+      <mat-grid-tile>Top Rated</mat-grid-tile>
+      <mat-grid-tile>New*</mat-grid-tile>
+      <mat-grid-tile>Ready 2 eat</mat-grid-tile>
+    </mat-grid-list>
+
+     Browse by Category
+    <mat-grid-list cols="3" gutterSize="1px">
+      <mat-grid-tile 
+        *ngFor="let cuisine of cuisines" 
+        style="background:turquoise;"
+        #checked
+        (click)="(checked == true)">
+        {{cuisine}}
+        <mat-grid-tile-header *ngIf="checked == true" style="background-color: turquoise">
+          <mat-checkbox></mat-checkbox>
+        </mat-grid-tile-header>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+
+  <!-- <mat-card *ngFor="let loc of geoLocations$|async">
+    <mat-card-title>{{loc.userLocation}}</mat-card-title>
+    <mat-card-subtitle>{{loc.userLocation.latitude}}</mat-card-subtitle>
+
+  </mat-card> -->
+
+
+</div>

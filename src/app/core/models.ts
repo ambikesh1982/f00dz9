@@ -1,9 +1,9 @@
 import * as firebase from 'firebase/app';
 
 export interface Fooditem {
-    id?: string;
+    id: string;
     createdAt?: Date;
-    createdBy?: string;
+    createdBy?: {id: string, name: string, photoUrl: string};
     isModified?: boolean;
     modifiedAt?: Date;
     geoInfoFromAppUser?: boolean;

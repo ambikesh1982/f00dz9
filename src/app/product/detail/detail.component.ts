@@ -2,9 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Fooditem, AppUser } from '../../core/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-// import { AppCartService } from '../../app-cart/app-cart.service';
+import { AppCartService } from '../../app-cart/app-cart.service';
 
 @Component({
   selector: 'app-detail',
@@ -18,44 +16,36 @@ export class DetailComponent implements OnInit, OnDestroy {
   preview: string;
   fooditemImageCount: number;
   fabActionIcon: string;
-  subscription: Subscription;
+  currentUser: AppUser;
 
 
   constructor(
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    // private cartService: AppCartService
+    private cartService: AppCartService
   ) {
+    this.currentUser = this.auth.currAppUser;
     this.fooditem = this.route.snapshot.data['product'];
+    console.log('Fooditem from resolver: ', this.fooditem);
   }
+
 
   ngOnInit() {
 
-    if (this.auth.currAppUser) {
-      console.log('User already unwrapped:', this.auth.currAppUser);
-      this.setFabAction(this.auth.currAppUser.uid);
-    } else {
-      console.log('No unwrapped appUser, Subscribing and getting the user info');
-      this.auth.currUser$.pipe(
-        take(1)
-      ).subscribe(user => {
-        if (user) {
-          this.setFabAction(user.uid);
-        } else {
-          this.setFabAction('nouser');
-        }
-      });
-    }
-
     this.fooditemImageCount = this.fooditem.images.length;
-    console.log('Fooditem from resolver: ', this.fooditem);
     this.preview = this.fooditem.images[0].url;
+
+    if (this.currentUser) {
+      this.setFabAction(this.currentUser.uid);
+    } else {
+      this.setFabAction('nouser');
+    }
 
   }
 
   setFabAction(uid: string) {
-    if (uid === this.fooditem.createdBy) {
+    if (uid === this.fooditem.createdBy.id) {
       this.fabActionIcon = 'edit';
     } else {
       this.fabActionIcon = 'add';
@@ -65,7 +55,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   onClickFab(action: string) {
     switch (action) {
       case 'add':
-        // this.cartService.manageAppCart(this.auth.currAppUser.uid, this.fooditem);
+        this.cartService.manageProduct(this.auth.currAppUser.uid, this.fooditem);
         this.router.navigate(['app-cart']);
         break;
       case 'edit':
@@ -79,9 +69,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    console.log('#### DetailComponent: Destroyed');
   }
 
 }

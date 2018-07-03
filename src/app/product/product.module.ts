@@ -31,7 +31,8 @@ const productRoutes: Routes = [
     path: 'detail/:id',
     component: DetailComponent,
     data: { title: 'PRODUCT_DETAIL_PAGE' },
-    resolve: { product: ProductResolver }
+    resolve: { product: ProductResolver },
+    canActivate: [AuthGuard]
   },
   {
     path: '',
