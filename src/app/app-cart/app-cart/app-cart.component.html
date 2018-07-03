@@ -1,7 +1,23 @@
-<mat-card *ngFor="let order of orders$|async">{{order.name}}
-    <app-cart-list 
-        [cartID]="cartID" 
-        [orderID]="order.id"
-        (orderUpdate)="updateOrder($event)">
-    </app-cart-list>
-</mat-card>
+<div fxLayout="column" fxLayout.xs="column">
+    <div *ngIf="orders$|async as orders">
+        <div *ngIf="orders.length != 0; else emptyCart">
+            <mat-card *ngFor="let order of orders">
+                {{order.name}}
+                <app-cart-list [cartID]="cartID" [orderID]="order.id" (orderUpdate)="updateOrder($event)">
+                </app-cart-list>
+            </mat-card>
+            <app-fab-action [fabIcon]="'done'" (fabActionEvent)="fabAction($event)">
+            </app-fab-action>
+        </div>
+
+    </div>
+
+    <ng-template #emptyCart>
+        <mat-card>
+            <mat-card-title> Your Cart is empty. Go Shopping :)</mat-card-title>
+        </mat-card>
+        <app-fab-action [fabIcon]="'add'" (fabActionEvent)="fabAction($event)">
+        </app-fab-action>
+    </ng-template>
+
+</div>

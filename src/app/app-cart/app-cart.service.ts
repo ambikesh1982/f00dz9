@@ -160,3 +160,27 @@ export class AppCartService {
 
 
 }
+
+
+
+/*   constructor(private afs: AngularFirestore, private auth: AuthService) {
+    console.log('From cartservice constructor');
+
+    this.cartCollection = 'appcart';
+    this.ordersSubCollection = 'orders';
+    this.itemSubCollection = 'items';
+
+    this.auth.currUser$.pipe(
+      switchMap((user: AppUser) => {
+        if (user) {
+          return this.getCartItems$(user.uid);
+        } else { return of([]); }
+      })
+    ).subscribe(items => {
+      console.log('Items in the cart >>>>: ', items);
+      this.getCartSize$.next(items.length);
+    },
+      e => {
+        console.log('error in checking cartSize: ', e);
+      });
+  } */
