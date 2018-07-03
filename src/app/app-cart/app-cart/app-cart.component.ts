@@ -17,7 +17,7 @@ export class AppCartComponent implements OnInit {
   orders$: Observable<ICartDoc[]>;
 
   constructor(
-    private cartService: AppCartService,
+    public cartService: AppCartService,
     private afs: AngularFirestore,
     private auth: AuthService,
     private router: Router
@@ -32,11 +32,16 @@ export class AppCartComponent implements OnInit {
 
   updateOrder(order: { id: string, dataToUpdate: { qty: number, amtPayable: number}} ) {
     if (order.dataToUpdate.qty === 0) {
-      console.log('No items in the order. Remove the order');
       this.cartService.removeOrder(this.cartID, order.id);
     } else {
       this.cartService.updateOrder(this.cartID, order.id, order.dataToUpdate);
     }
+  }
+
+  removeOrder(orderID: string) {
+    // doc().delete() - Does not delete any nested collections.
+    // First delete nested collection, and then delete the document.
+    this.cartService.removeOrder(this.cartID, orderID);
   }
 
   navigateToChatRoute( sellerID: string) {
@@ -50,6 +55,11 @@ export class AppCartComponent implements OnInit {
     } else {
       console.log('TODO: Navigate to checkout component.');
     }
+  }
+
+  onClickOrderAction(orderid: string) {
+    console.log('onClickOrderAction: ', orderid);
+    this.cartService.updateOrder(this.cartID, orderid, {state: 'Awaiting Confirmation'});
   }
 
 }

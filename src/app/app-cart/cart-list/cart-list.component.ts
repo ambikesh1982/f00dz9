@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, first } from 'rxjs/operators';
 import { AppCartService } from '../app-cart.service';
 
 @Component({
@@ -30,6 +30,15 @@ export class CartListComponent implements OnInit {
   }
 
   updateQty(item: ICartItem, count: number) {
+    this.cartService.getAllItems$(this.cartID, this.orderID).pipe(
+      first(),
+      tap(resp => {
+        const orderItemsCount = resp.reduce((t, i) => t + i.qty, 0);
+        const orderValue = resp.reduce((t, i) => t + (i.price * i.qty), 0);
+        const orderDataToUpdate = { qty: orderItemsCount, amtPayable: orderValue };
+        this.orderUpdate.emit({ id: this.orderID, dataToUpdate: orderDataToUpdate });
+      })
+    );
     const updatedQty = item.qty + count;
     if ( updatedQty !== 0 ) {
       this.cartService.updateProduct(this.cartID, this.orderID, item.id, { qty: updatedQty });

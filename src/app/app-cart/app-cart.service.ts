@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 import { AppUser, Fooditem } from '../core/models';
 
@@ -24,13 +24,29 @@ export class AppCartService {
     this.orderSubColl = 'orders';
     this.itemSubColl = 'items';
 
-    this.auth.currUser$.subscribe(user => {
-      if (user) {
-        console.log('AppCartService: CurrentUser: ', user);
-      } else {
-        console.log('AppCartService: CurrentUser: ', user);
-      }
-    });
+    // this.auth.currUser$.subscribe(user => {
+    //   if (user) {
+    //     console.log('AppCartService: CurrentUser: ', user);
+    //   } else {
+    //     console.log('AppCartService: CurrentUser: ', user);
+    //   }
+    // });
+
+    this.auth.currUser$.pipe(
+      switchMap((user: AppUser) => {
+        if (user) {
+          return this.getAllOrders$(user.uid);
+        } else { return of([]); }
+      })
+    ).subscribe(orders => {
+      const orderItemsCount = orders.reduce((t, i) => t + i.qty, 0);
+      this.getCartSize$.next(orderItemsCount);
+    },
+      e => {
+        console.log('error in checking cartSize: ', e);
+      });
+
+
   } // constructor
 
   getAllOrders$(cartID: string): Observable<ICartDoc[]> {
@@ -141,9 +157,9 @@ export class AppCartService {
       .collection(this.orderSubColl).doc(orderID);
 
     orderRef.update(data).then(() => {
-      console.log('Item updated');
+      console.log('Order updated');
     }).catch(e => {
-      console.log('Error while updating the item: ', e);
+      console.log('Error while updating the Order: ', e);
     });
   }
 
