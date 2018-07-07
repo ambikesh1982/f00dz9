@@ -94,6 +94,9 @@ export class LayoutService {
       case 'APP_CART_PAGE':
         this.appToolBar$.next({ pageTitle: 'My Cart', showCancelIcon: true });
         break;
+      case 'APP_CHECKOUT_PAGE':
+        this.appToolBar$.next({ pageTitle: 'My Orders', showCancelIcon: true });
+        break;
       case 'APP_SEARCH_PAGE':
         this.appToolBar$.next({ pageTitle: 'Search', showCancelIcon: true });
         break;

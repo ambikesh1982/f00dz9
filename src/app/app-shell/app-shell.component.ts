@@ -17,7 +17,7 @@ export class AppShellComponent implements OnInit {
 
   navList = [
     { menuIcon: 'home', menuName: 'Home', menuRoute: '/home' },
-    { menuIcon: 'order', menuName: 'My Orders', menuRoute: '/app-user' },
+    { menuIcon: 'order', menuName: 'My Orders', menuRoute: '/checkout' },
     { menuIcon: 'cart', menuName: 'Cart', menuRoute: '/app-cart' },
     { menuIcon: 'heart', menuName: 'Wish List', menuRoute: '/wishlist' },
     { menuIcon: 'user', menuName: 'Profile', menuRoute: '/app-user' },

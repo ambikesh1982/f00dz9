@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { first, switchMap } from 'rxjs/operators';
+import { first, switchMap, tap, map, flatMap } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 import { AppUser, Fooditem } from '../core/models';
 
@@ -103,6 +103,21 @@ export class AppCartService {
     });
   }
 
+  removeAllProducts(cartID: string, orderID: string) {
+    const itemsCollRef = this.afs.collection(this.cartColl).doc(cartID)
+      .collection(this.orderSubColl).doc(orderID)
+      .collection(this.itemSubColl);
+
+      return itemsCollRef.valueChanges().pipe(
+        first(),
+        tap(items => {
+          items.forEach( item => {
+            itemsCollRef.doc(item.id).delete();
+          });
+        })
+      ).toPromise();
+  }
+
   manageProduct(buyerID: string, product: Fooditem) {
     const orderID = product.createdBy.id;
     const productID = product.id;
@@ -168,10 +183,29 @@ export class AppCartService {
       .collection(this.orderSubColl).doc(orderID);
 
     orderRef.delete().then(() => {
-      console.log('Item Removed');
+      console.log('Order Removed!!');
     }).catch(e => {
-      console.log('Error while removing the item: ', e);
+      console.log('Error while removing the order document: ', e);
     });
+  }
+
+  checkoutOrder(cartID: string, orderID: string) {
+    return this.afs.collection(this.cartColl).doc(cartID)
+      .collection(this.orderSubColl).doc(orderID)
+      .collection(this.itemSubColl).valueChanges().pipe(
+        first(),
+        map( items => {
+          const checkedoutOrder = {
+            cartID: cartID,
+            orderID: orderID,
+            state: 'Awaiting Confirmation',
+            items: items
+          };
+          return checkedoutOrder;
+        } )
+      );
+    // 1. Add order to checkout collection.
+    // 2. Remove order from cart.
   }
 
 

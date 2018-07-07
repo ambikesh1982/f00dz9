@@ -5,9 +5,9 @@
 <mat-list>
   <mat-list-item *ngFor="let item of items$|async">
 
-    <img matListAvatar [src]="item.url" alt="...">
-
-    <h4 mat-line>{{item.title}}</h4>
+    <img matListAvatar [src]="item.url" alt="..." routerLink="/detail/{{item.id}}">
+    
+    <h4 mat-line routerLink="/detail/{{item.id}}" style="color:blue">{{item.title}}</h4>
     <p mat-line> SGD {{item.price}} </p>
     <p mat-line>Total: SGD {{item.price * item.qty}}</p>
 

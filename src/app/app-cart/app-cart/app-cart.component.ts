@@ -57,9 +57,21 @@ export class AppCartComponent implements OnInit {
     }
   }
 
-  onClickOrderAction(orderid: string) {
-    console.log('onClickOrderAction: ', orderid);
-    this.cartService.updateOrder(this.cartID, orderid, {state: 'Awaiting Confirmation'});
+  onClickCheckout(orderID: string) {
+    this.cartService.checkoutOrder(this.cartID, orderID).subscribe(
+      checkedoutOrder => {
+        this.afs.collection('checkout').add(checkedoutOrder)
+          .then( resp => {
+            console.log('Order Checked out successfully');
+            this.cartService.removeAllProducts(this.cartID, orderID)
+              .then( reps => {
+                this.cartService.removeOrder(this.cartID, orderID);
+              });
+            this.router.navigate(['/checkout']);
+          })
+          .catch( e => console.log('Error in order checkout: ', e));
+      }
+    );
   }
 
 }
