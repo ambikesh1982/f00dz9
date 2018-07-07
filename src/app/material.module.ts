@@ -20,6 +20,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatStepperModule,
+  MatTabsModule,
   MatToolbarModule,
   MAT_CHECKBOX_CLICK_ACTION
   // MatDialog,
@@ -49,6 +50,7 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatStepperModule,
+    MatTabsModule,
     MatToolbarModule
     // MatDialog,
     // MatDialogRef,

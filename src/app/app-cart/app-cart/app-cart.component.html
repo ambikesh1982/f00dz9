@@ -1,29 +1,36 @@
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch">
     <div *ngIf="orders$|async as orders">
+
+        <ng-template #emptyCart>
+            <mat-card>
+                <mat-card-title> Your Cart is empty. Go Shopping :)</mat-card-title>
+            </mat-card>
+        </ng-template>
+
         <div *ngIf="orders.length != 0; else emptyCart">
             <mat-card *ngFor="let order of orders" mat-elevation="4">
                 <span>{{order.name}}</span>
-                <app-cart-list [cartID]="cartID" [orderID]="order.id" (orderUpdate)="updateOrder($event)">
+
+                <app-cart-list 
+                    [cartID]="cartID" 
+                    [orderID]="order.id" 
+                    (orderUpdate)="updateOrder($event)">
                 </app-cart-list>
+
                 <mat-card-actions align="right">
-                    <!-- <button mat-raised-button (click)="onClickOrderAction(order.id)">{{order.state}}</button> -->
-                    <button mat-mini-fab color="primary" (click)="onClickCheckout(order.id)">
+                    <button 
+                        mat-mini-fab color="primary" 
+                        (click)="onClickCheckout(order.id)">
                         <mat-icon>done</mat-icon>
                     </button>
                 </mat-card-actions>
+
                 <mat-divider></mat-divider>
             </mat-card>
-            <!-- <app-fab-action [fabIcon]="'add'" (fabActionEvent)="fabAction($event)">
-            </app-fab-action> -->
         </div>
 
     </div>
 
-    <ng-template #emptyCart>
-        <mat-card>
-            <mat-card-title> Your Cart is empty. Go Shopping :)</mat-card-title>
-        </mat-card>
-    </ng-template>
     <app-fab-action [fabIcon]="'add'" (fabActionEvent)="fabAction($event)">
     </app-fab-action>
 

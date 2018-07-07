@@ -10,11 +10,11 @@ export class CheckoutService {
   constructor(private afs: AngularFirestore, private auth: AuthService) { }
 
   getCheckedOutOrders(userID: string) {
-    return this.afs.collection('checkout', ref => ref.where('orderID', '==', userID)).valueChanges();
+    return this.afs.collection('checkout', ref => ref.where('cartID', '==', userID)).valueChanges();
   }
 
   getMyOrders(userID: string) {
-    return this.afs.collection('checkout', ref => ref.where('cartID', '==', userID)).valueChanges();
+    return this.afs.collection('checkout', ref => ref.where('orderID', '==', userID)).valueChanges();
   }
 
 }

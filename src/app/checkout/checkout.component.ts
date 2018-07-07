@@ -9,7 +9,8 @@ import { AuthService } from '../core/auth.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  orders$: any;
+  checkedoutOrders$: any;
+  receivedOrders$: any;
   currentUser: any;
   // orderStates = ['Confirmed', 'Rejected', 'Partially Accepted'];
 
@@ -18,7 +19,8 @@ export class CheckoutComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.orders$ = this.checkoutService.getCheckedOutOrders(this.currentUser);
+    this.checkedoutOrders$ = this.checkoutService.getCheckedOutOrders(this.currentUser);
+    this.receivedOrders$ = this.checkoutService.getMyOrders(this.currentUser);
   }
 
 }
