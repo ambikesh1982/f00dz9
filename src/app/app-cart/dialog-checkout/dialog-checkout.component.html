@@ -1,0 +1,31 @@
+<div [formGroup]="checkoutForm">
+<h2 mat-dialog-title>Payment and Delivery</h2>
+
+<!-- <mat-dialog-content fxLayout="row" fxLayoutAlign="space-between"> -->
+  <mat-dialog-content>
+
+  <mat-radio-group class="checkout-radio-group" formControlName="paymentMethod">
+    <mat-radio-button class="checkout-radio-button" value="online">Online</mat-radio-button>
+    <mat-radio-button class="checkout-radio-button" value="cashOnDelivery">Cash-On-Delivery</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-divider></mat-divider>
+  <br>
+
+  <mat-radio-group class="checkout-radio-group" formControlName="deliveryMethod">
+    <mat-radio-button class="checkout-radio-button" value="dineIn">Dine In</mat-radio-button>
+    <mat-radio-button class="checkout-radio-button" value="takeAway">Take Away</mat-radio-button>
+    <mat-radio-button class="checkout-radio-button" value="homeDelivery">Home Delivery</mat-radio-button>
+  </mat-radio-group>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="float:right">
+  <button mat-icon-button (click)="onNoClick()">
+    <mat-icon color="primary">clear</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onYesClick()">
+    <mat-icon color="accent">done</mat-icon>
+  </button>
+</mat-dialog-actions>
+</div>

@@ -189,7 +189,7 @@ export class AppCartService {
     });
   }
 
-  checkoutOrder(cartID: string, orderID: string) {
+  checkoutOrder(cartID: string, orderID: string, paymentMethod: string, deliveryMethod: string) {
     return this.afs.collection(this.cartColl).doc(cartID)
       .collection(this.orderSubColl).doc(orderID)
       .collection(this.itemSubColl).valueChanges().pipe(
@@ -199,6 +199,8 @@ export class AppCartService {
             cartID: cartID,
             orderID: orderID,
             state: 'Awaiting Confirmation',
+            paymentMethod: paymentMethod,
+            deliveryMethod: deliveryMethod,
             items: items
           };
           return checkedoutOrder;

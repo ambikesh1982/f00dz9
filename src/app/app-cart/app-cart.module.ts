@@ -7,6 +7,8 @@ import { AuthGuard } from '../core/auth.guard';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
+import { DialogCheckoutComponent } from './dialog-checkout/dialog-checkout.component';
+import { FormsModule, ReactiveFormsModule } from '../../../node_modules/@angular/forms';
 
 const appCartRoutes: Routes = [
   {
@@ -21,10 +23,13 @@ const appCartRoutes: Routes = [
   imports: [
     CommonModule,
     FlexLayoutModule,
+    FormsModule,
     MaterialModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(appCartRoutes),
   ],
-  declarations: [AppCartComponent, CartListComponent]
+  declarations: [AppCartComponent, CartListComponent, DialogCheckoutComponent],
+  entryComponents: [DialogCheckoutComponent]
 })
 export class AppCartModule { }

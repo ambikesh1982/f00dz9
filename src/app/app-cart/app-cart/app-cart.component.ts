@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../core/auth.service';
 import { AppCartService } from '../app-cart.service';
+import { DialogCheckoutComponent, DialogData } from '../dialog-checkout/dialog-checkout.component';
 
 @Component({
   selector: 'app-app-cart',
@@ -16,11 +18,13 @@ export class AppCartComponent implements OnInit {
   cartID: string;
   orders$: Observable<ICartDoc[]>;
 
+
   constructor(
     public cartService: AppCartService,
     private afs: AngularFirestore,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.cartID = this.auth.currAppUser.uid;
   }
@@ -30,7 +34,7 @@ export class AppCartComponent implements OnInit {
     this.orders$ = this.cartService.getAllOrders$(this.cartID);
   }
 
-  updateOrder(order: { id: string, dataToUpdate: { qty: number, amtPayable: number}} ) {
+  updateOrder(order: { id: string, dataToUpdate: { qty: number, amtPayable: number } }) {
     if (order.dataToUpdate.qty === 0) {
       this.cartService.removeOrder(this.cartID, order.id);
     } else {
@@ -44,7 +48,7 @@ export class AppCartComponent implements OnInit {
     this.cartService.removeOrder(this.cartID, orderID);
   }
 
-  navigateToChatRoute( sellerID: string) {
+  navigateToChatRoute(sellerID: string) {
     console.log('navigateToChatRoute(sellerID): ', sellerID);
     console.log('navigateToChatRoute(buyerID): ', this.cartID);
   }
@@ -58,20 +62,36 @@ export class AppCartComponent implements OnInit {
   }
 
   onClickCheckout(orderID: string) {
-    this.cartService.checkoutOrder(this.cartID, orderID).subscribe(
-      checkedoutOrder => {
-        this.afs.collection('checkout').add(checkedoutOrder)
-          .then( resp => {
-            console.log('Order Checked out successfully');
-            this.cartService.removeAllProducts(this.cartID, orderID)
-              .then( reps => {
-                this.cartService.removeOrder(this.cartID, orderID);
-              });
-            this.router.navigate(['/checkout']);
-          })
-          .catch( e => console.log('Error in order checkout: ', e));
+    const dialogRef = this.dialog.open(DialogCheckoutComponent, {
+      data: { cod: true, online: false }
+    });
+
+    dialogRef.afterClosed().subscribe((data: DialogData) => {
+      if (data) {
+        console.log('Proceed to checkout: ', data);
+        this.cartService.checkoutOrder(
+          this.cartID,
+          orderID,
+          data.paymentMethod,
+          data.deliveryMethod
+        ).subscribe(
+          checkedoutOrder => {
+            this.afs.collection('checkout').add(checkedoutOrder)
+              .then(() => {
+                console.log('Order Checked out successfully');
+                this.cartService.removeAllProducts(this.cartID, orderID)
+                  .then(() => {
+                    this.cartService.removeOrder(this.cartID, orderID);
+                  });
+                this.router.navigate(['/checkout']);
+              })
+              .catch(e => console.log('Error in order checkout: ', e));
+          }
+        );
+      } else {
+        console.log('Checkout cancelled');
       }
-    );
+    });
   }
 
 }
