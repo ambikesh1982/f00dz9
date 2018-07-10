@@ -14,22 +14,21 @@
 
             <mat-list>
               <mat-list-item *ngFor="let item of order.items">
-
                 <img matListAvatar [src]="item.url" alt="...">
-
                 <h4 mat-line>{{item.title}} ( SGD {{item.price}})</h4>
                 <!-- <p mat-line> SGD {{item.price}} </p> -->
                 <p mat-line> Quantity {{item.qty}} </p>
                 <p mat-line>Total: SGD {{item.price * item.qty}}</p>
-
-
               </mat-list-item>
             </mat-list>
 
-
-            <!-- <span>{{order|json}}</span> -->
-            <mat-card-actions>
-              <p>Status: {{order.state}}</p>
+            <mat-card-actions fxLayout="row">
+              <h3 style="color: yellowgreen; margin-top: 10px;">{{order.state}}</h3>
+              <!-- <span>Status: {{order.state}}</span> -->
+              <span class="spacer"></span>
+              <button mat-icon-button (click)="deleteOrder(order.id)">
+                <mat-icon color="accent">clear</mat-icon>
+              </button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -51,7 +50,6 @@
       <div *ngIf="receivedOrders$|async as orders">
         <div *ngIf="orders.length != 0; else noOrders">
           <mat-card *ngFor="let order of orders">
-            <!-- <p>OrderID: {{order.orderID}}</p> -->
             <p>cartID: {{order.cartID}}</p>
       
             <mat-list>
@@ -68,10 +66,17 @@
               </mat-list-item>
             </mat-list>
       
-      
             <!-- <span>{{order|json}}</span> -->
-            <mat-card-actions>
-              <p>Status: {{order.state}}</p>
+            <mat-card-actions fxLayout="row">
+              <h3 style="color: yellowgreen; margin-top: 10px;">{{order.state}}</h3>
+              <!-- <span>Status: {{order.state}}</span> -->
+              <span class="spacer"></span>
+              <button mat-icon-button (click)="cancelOrder(order.id)">
+                <mat-icon color="accent">clear</mat-icon>
+              </button>
+              <button mat-icon-button (click)="confirmOrder(order.id)">
+                <mat-icon color="primary">done</mat-icon>
+              </button>
             </mat-card-actions>
           </mat-card>
         </div>
