@@ -10,7 +10,6 @@
         <div *ngIf="orders.length != 0; else emptyCheckout">
           <mat-card *ngFor="let order of orders">
             <p>OrderID: {{order.orderID}}</p>
-            <!-- <p>cartID: {{order.cartID}}</p> -->
 
             <mat-list>
               <mat-list-item *ngFor="let item of order.items">
@@ -24,7 +23,6 @@
 
             <mat-card-actions fxLayout="row">
               <h3 style="color: yellowgreen; margin-top: 10px;">{{order.state}}</h3>
-              <!-- <span>Status: {{order.state}}</span> -->
               <span class="spacer"></span>
               <button mat-icon-button (click)="deleteOrder(order.id)">
                 <mat-icon color="accent">clear</mat-icon>
@@ -65,11 +63,9 @@
       
               </mat-list-item>
             </mat-list>
-      
-            <!-- <span>{{order|json}}</span> -->
+    
             <mat-card-actions fxLayout="row">
               <h3 style="color: yellowgreen; margin-top: 10px;">{{order.state}}</h3>
-              <!-- <span>Status: {{order.state}}</span> -->
               <span class="spacer"></span>
               <button mat-icon-button (click)="cancelOrder(order.id)">
                 <mat-icon color="accent">clear</mat-icon>
