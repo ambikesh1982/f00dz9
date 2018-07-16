@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap, first } from 'rxjs/operators';
 import { AppCartService } from '../app-cart.service';
+import { ICartItem } from '../app-cart.model';
 
 @Component({
   selector: 'app-cart-list',
