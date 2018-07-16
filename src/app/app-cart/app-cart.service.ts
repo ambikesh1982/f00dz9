@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { first, switchMap, tap, map, flatMap } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 import { AppUser, Fooditem } from '../core/models';
+import { ICartDoc, ICartItem, ICheckout } from './app-cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -189,25 +190,24 @@ export class AppCartService {
     });
   }
 
-  checkoutOrder(cartID: string, orderID: string, paymentMethod: string, deliveryMethod: string) {
-    return this.afs.collection(this.cartColl).doc(cartID)
-      .collection(this.orderSubColl).doc(orderID)
+  checkoutOrder(buyer: { id: string, name: string }, seller: { id: string, name: string}, paymentMethod: string, deliveryMethod: string) {
+    return this.afs.collection(this.cartColl).doc(buyer.id)
+      .collection(this.orderSubColl).doc(seller.id)
       .collection(this.itemSubColl).valueChanges().pipe(
         first(),
         map( items => {
-          const checkedoutOrder = {
-            cartID: cartID,
-            orderID: orderID,
-            state: 'Awaiting Confirmation',
-            paymentMethod: paymentMethod,
-            deliveryMethod: deliveryMethod,
-            items: items
+          const checkedoutOrder = <ICheckout>{
+            buyer: buyer,
+            seller: seller,
+            currState: {state: 'Awaiting_Confirmation'},
+            paymentOption: paymentMethod,
+            deliveryOption: deliveryMethod,
+            items: items,
+            checkedOutAt: new Date()
           };
           return checkedoutOrder;
         } )
       );
-    // 1. Add order to checkout collection.
-    // 2. Remove order from cart.
   }
 
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 // Firebase imports
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 // rxjs imports
 import { BehaviorSubject, Observable } from 'rxjs';
 // local imports

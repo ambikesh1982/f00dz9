@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../core/auth.service';
 import { AppCartService } from '../app-cart.service';
 import { DialogCheckoutComponent, DialogData } from '../dialog-checkout/dialog-checkout.component';
+import { ICartDoc } from '../app-cart.model';
 
 @Component({
   selector: 'app-app-cart',
@@ -14,7 +15,7 @@ import { DialogCheckoutComponent, DialogData } from '../dialog-checkout/dialog-c
 })
 
 export class AppCartComponent implements OnInit {
-
+  cart: {id: string, name: string};
   cartID: string;
   orders$: Observable<ICartDoc[]>;
 
@@ -26,6 +27,7 @@ export class AppCartComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog
   ) {
+    this.cart = { id: this.auth.currAppUser.uid, name: this.auth.currAppUser.displayName };
     this.cartID = this.auth.currAppUser.uid;
   }
 
@@ -61,7 +63,7 @@ export class AppCartComponent implements OnInit {
     }
   }
 
-  onClickCheckout(orderID: string) {
+  onClickCheckout(orderID: string, name: string) {
     const dialogRef = this.dialog.open(DialogCheckoutComponent, {
       data: { cod: true, online: false }
     });
@@ -70,8 +72,8 @@ export class AppCartComponent implements OnInit {
       if (data) {
         console.log('Proceed to checkout: ', data);
         this.cartService.checkoutOrder(
-          this.cartID,
-          orderID,
+          this.cart,
+          {id: orderID, name: name},
           data.paymentMethod,
           data.deliveryMethod
         ).subscribe(

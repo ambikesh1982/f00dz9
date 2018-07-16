@@ -11,7 +11,7 @@ import { ChatService } from './chat.service';
 
 const chatRoute: Routes = [
   {
-    path: ':fid',
+    path: ':id',
     component: ChatComponent,
     data: { title: 'CHAT_PAGE' },
     resolve: { chat: ChatResolver },

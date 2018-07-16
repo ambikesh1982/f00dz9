@@ -1,5 +1,5 @@
 
-interface ICartItem {
+export interface ICartItem {
   id: string;
   title?: string;
   url?: string;
@@ -7,7 +7,7 @@ interface ICartItem {
   price?: number;
 }
 
-interface ICartDoc {
+export interface ICartDoc {
   id: string;
   name?: string;
   state?: string;
@@ -15,6 +15,30 @@ interface ICartDoc {
   amtPayable?: number;
   discount?: number;
 }
+
+export interface ICheckout {
+  buyer: {id: string, name: string};
+  seller: { id: string, name: string };
+  items: ICartItem[];
+  currState: IOrderState;
+  paymentOption: string;
+  deliveryOption: string;
+  deliveryAddress?: string;
+  checkedOutAt?: Date;
+  cancelledAt?: Date;
+  rejectedAt?: Date;
+  confirmedAt?: Date;
+  completedAt?: Date;
+}
+
+export interface IOrderState {
+  state: string;
+  updatedAt: Date;
+  reason?: string;
+  additionalComments?: string;
+}
+
+
 
 /*
 APPCART --> buyerid

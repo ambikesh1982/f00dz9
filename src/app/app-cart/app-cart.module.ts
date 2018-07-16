@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { DialogCheckoutComponent } from './dialog-checkout/dialog-checkout.component';
-import { FormsModule, ReactiveFormsModule } from '../../../node_modules/@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appCartRoutes: Routes = [
   {

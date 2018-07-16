@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { Subscription } from 'rxjs';
 import { LocationService } from '../../../core/location.service';
 import { IGeoInfo } from '../../../core/models';

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  of, BehaviorSubject, combineLatest } from 'rxjs';
-
-import { Fooditem } from './models';
-import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
-import * as firebase from 'firebase/app';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Fooditem } from './models';
+
 
 @Injectable()
 export class ProductService {

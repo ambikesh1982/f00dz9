@@ -25,3 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+Order states: 
+1. Awaiting_Confirmation -> Cancel|Reject|Confirm
+2. Confirmed -> Completed
+3. Cancelled 
+4. Rejected
+5. Timeout
+6. Completed
+
+order state interface: 
+{
+    state: string;
+    updatedAt: date();
+    reason?: string;
+    additionalComments?: string;
+}

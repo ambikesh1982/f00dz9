@@ -22,7 +22,7 @@ import {
   MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
-  MAT_CHECKBOX_CLICK_ACTION
+  MAT_CHECKBOX_CLICK_ACTION,
   // MatDialog,
   // MatDialogRef,
   // MatDialogModule
@@ -30,7 +30,6 @@ import {
 
 @NgModule({
   exports: [
-    // CommonModule
     MatBadgeModule,
     MatButtonModule,
     MatButtonToggleModule,

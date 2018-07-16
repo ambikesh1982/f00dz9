@@ -1,0 +1,118 @@
+<div>
+  <mat-tab-group>
+    <mat-tab>
+
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">call_made</mat-icon>
+        Orders Placed
+      </ng-template>
+
+      <div *ngIf="checkedoutOrders$|async as orders">
+        <div *ngIf="orders.length != 0; else emptyCheckout">
+          <mat-card *ngFor="let order of orders; let i = index" style="padding-top:14px">
+            <h3 style="margin-bottom: 0px">{{i+1}}. {{order.buyer.name}}</h3>
+
+            <mat-list>
+              <!-- <p mat-sub-header style="margin-top:0">{{order.buyer.name}}</p> -->
+              <mat-list-item *ngFor="let item of order.items">
+                <img matListAvatar [src]="item.url" alt="...">
+                <h4 mat-line>{{item.title}}</h4>
+                <!-- <p mat-line> SGD {{item.price}} </p> -->
+                <p mat-line> {{item.qty}} items x SGD {{item.price}} = SGD {{item.price * item.qty}}</p>
+              </mat-list-item>
+            </mat-list>
+
+            <mat-card-actions fxLayout="row" align="right">
+
+              <div *ngIf="order.currState">
+                <h3>
+                  <span>{{order.currState.state}}</span>
+                  <span *ngIf="order.currState.reason">: [{{CancellationReasons[order.currState.reason]}}]</span>
+                </h3>
+                <p *ngIf="order.currState.additionalComments">{{order.currState.additionalComments}}</p>
+              </div>
+
+              <span class="spacer"></span>
+
+              <button *ngIf="order.currState.state=='Awaiting_Confirmation'" mat-icon-button (click)="cancelOrder(order.id)">
+                <mat-icon color="accent">clear</mat-icon>
+              </button>
+
+              <button *ngIf="order.currState.state=='Confirmed'" mat-icon-button (click)="enableChat(order.id)">
+                <mat-icon color="accent">chat_bubble_outline</mat-icon>
+              </button>
+
+            </mat-card-actions>
+
+          </mat-card>
+          <!-- <mat-divider></mat-divider> -->
+        </div>
+
+        <ng-template #emptyCheckout>
+          <mat-card>
+            <mat-card-title> You have nothing to checkout...</mat-card-title>
+          </mat-card>
+        </ng-template>
+
+      </div>
+    </mat-tab>
+
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">call_received</mat-icon>
+        Orders Received
+      </ng-template>
+      <div *ngIf="receivedOrders$|async as orders">
+        <div *ngIf="orders.length != 0; else noOrders">
+          <mat-card *ngFor="let order of orders">
+
+            <mat-list>
+              <p mat-sub-header style="margin-top:0">{{order.seller.name}}</p>
+              <mat-list-item *ngFor="let item of order.items">
+                <img matListAvatar [src]="item.url" alt="...">
+                <h4 mat-line>{{item.title}}</h4>
+                <!-- <p mat-line> SGD {{item.price}} </p> -->
+                <p mat-line> {{item.qty}} items x SGD {{item.price}} = SGD {{item.price * item.qty}}</p>
+              </mat-list-item>
+            </mat-list>
+
+            <mat-card-actions fxLayout="row" align="right">
+
+              <div *ngIf="order.currState">
+                <h3>
+                  <span>{{order.currState.state}}</span>
+                  <span *ngIf="order.currState.reason">: [{{CancellationReasons[order.currState.reason]}}]</span>
+                </h3>
+                <p *ngIf="order.currState.additionalComments">{{order.currState.additionalComments}}</p>
+              </div>
+              <span class="spacer"></span>
+
+              <div *ngIf="order.currState.state=='Awaiting_Confirmation'">
+                <button mat-icon-button (click)="rejectOrder(order.id)">
+                  <mat-icon color="accent">clear</mat-icon>
+                </button>
+                <button mat-icon-button (click)="confirmOrder(order.id)">
+                  <mat-icon color="primary">done</mat-icon>
+                </button>
+              </div>
+
+              <button *ngIf="order.currState.state=='Confirmed'" mat-icon-button (click)="enableChat(order.id)">
+                <mat-icon color="accent">chat_bubble_outline</mat-icon>
+              </button>
+
+            </mat-card-actions>
+          </mat-card>
+          <!-- <mat-divider></mat-divider> -->
+        </div>
+
+        <ng-template #noOrders>
+          <mat-card>
+            <mat-card-title> No orders for now...</mat-card-title>
+          </mat-card>
+        </ng-template>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

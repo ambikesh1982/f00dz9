@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { switchMap, map, take, tap, first } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
-
+import * as firebase from 'firebase';
+import { FirebaseError } from 'firebase';
+import { Observable, of } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { AppUser } from './models';
-import { FirebaseError } from 'firebase/app';
+
 
 
 

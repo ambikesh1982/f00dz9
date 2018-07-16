@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-
 // Firebase imports
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { UploadTaskSnapshot } from '@firebase/storage-types';
-import * as firebase from 'firebase/app';
-
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireStorage } from 'angularfire2/storage';
+import * as firebase from 'firebase';
 // rxjs imports
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map, switchMap, tap, filter, flatMap } from 'rxjs/operators';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 // local imports
-import { Fooditem, ChatMessage, AppUser, ChatRoomInfo } from './models';
+import { AppUser, ChatMessage, Fooditem } from './models';
+
+
+
 
 
 const APP_ROOT_COLLECTIONS = {

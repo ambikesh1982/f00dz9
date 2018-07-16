@@ -1,5 +1,5 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { IGeoInfo } from './models';
