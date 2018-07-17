@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DialogCancellationComponent } from './dialog-cancellation/dialog-cancellation.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderlListComponent } from './orderl-list/orderl-list.component';
 
 const appCheckoutRoutes: Routes = [
   { path: 'history',
@@ -34,7 +35,7 @@ const appCheckoutRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(appCheckoutRoutes),
   ],
-  declarations: [CheckoutComponent, DialogCancellationComponent, OrderHistoryComponent],
+  declarations: [CheckoutComponent, DialogCancellationComponent, OrderHistoryComponent, OrderlListComponent],
   entryComponents: [DialogCancellationComponent]
 })
 export class CheckoutModule { }

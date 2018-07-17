@@ -25,17 +25,6 @@ export interface IOrderState {
 
 export class CheckoutComponent implements OnInit {
 
-  CancellationReasons = {
-    '0001': 'No_Response',
-    '0002': 'Not_Interested',
-    '0003': 'Better_Alternative',
-    '0004': 'Poor_Ratings',
-    '0005': 'Others',
-    '1001': 'Out_Of_Stock',
-    '1002': 'No_Delivery',
-    '1003': 'Poor_Rating',
-  };
-
   checkedoutOrders$: Observable<ICheckout[]>;
   receivedOrders$: Observable<ICheckout[]>;
   currentUser: any;
@@ -44,8 +33,7 @@ export class CheckoutComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private checkoutService: CheckoutService,
-    private auth: AuthService,
-    private router: Router) {
+    private auth: AuthService) {
       this.currentUser = this.auth.currAppUser.uid;
   }
 
@@ -67,68 +55,6 @@ export class CheckoutComponent implements OnInit {
           return { id, ...data };
         })
         ));
-  }
-
-  prepareOrderState(state: string, reason?: string, comments?: string ): IOrderState {
-    return <IOrderState> {
-      state: state,
-      reason: reason || null,
-      additionalComments: comments || null,
-      updatedAt: new Date()
-    };
-  }
-
-  confirmOrder(id: string) {
-    const orderState = this.prepareOrderState('Confirmed');
-    this.checkoutService.updateOrderState(id, orderState);
-  }
-
-  partiallyConfirmOrder(id: string) {
-    const orderState = this.prepareOrderState('Partilly_Confirmed');
-    this.checkoutService.updateOrderState(id, orderState);
-  }
-
-  deleteOrder(id: string) {
-    console.log('TODO: Order cancelled by buyer. Delete order data: ', id);
-    // this.checkoutService.deletePlacedOrder(id);
-  }
-
-
-  cancelOrder(id: string) {
-    const dialogRef = this.dialog.open(DialogCancellationComponent, {
-      data: <DialogData>{ userAction: 'CANCEL' }
-    });
-
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
-      if (data) {
-        const orderState = this.prepareOrderState('Cancelled', data.reason, data.additionalComments);
-        this.checkoutService.updateOrderState(id, orderState);
-      } else {
-        return;
-      }
-    });
-  }
-
-  rejectOrder(id: string) {
-    const dialogRef = this.dialog.open(DialogCancellationComponent, {
-      data: <DialogData>{ userAction: 'REJECT' }
-    });
-
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
-      if (data) {
-        const orderState = this.prepareOrderState('Rejected', data.reason, data.additionalComments);
-        this.checkoutService.updateOrderState(id, orderState);
-      } else {
-        return;
-      }
-    });
-  }
-
-  enableChat(id: string) {
-    // Add conversation collection to checkout/id document.
-    // Each message contains: sender name, msg, sent_at
-    this.router.navigate(['chat', id]);
-    console.log('TODO: Enable Chat for Chat Room: ', id);
   }
 
 }

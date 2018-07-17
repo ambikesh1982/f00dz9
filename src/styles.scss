@@ -16,6 +16,10 @@ app-toolbar {
   width: 100%;
 }
 
+mat-card {
+  max-width: 500px;
+}
+
 app-fab-action {
   position: fixed;
   bottom: 20px;

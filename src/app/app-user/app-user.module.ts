@@ -6,13 +6,14 @@
   import { FormsModule } from '@angular/forms';
   import { MaterialModule } from '../material.module';
   import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthGuard } from '../core/auth.guard';
 
   const userRoute: Routes = [
     {
       path: '',
       component: AppUserComponent,
-      data: { title: 'USER_PAGE' }
-      // canActivate: [AuthGuard]
+      data: { title: 'USER_PAGE' },
+      canActivate: [AuthGuard]
     } ];
 
 
