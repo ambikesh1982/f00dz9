@@ -54,6 +54,13 @@ export class AppCartService {
     return this.afs.collection(this.cartColl).doc(cartID).collection<ICartDoc>(this.orderSubColl).valueChanges();
   }
 
+  getOrdersById$(cartID: string, orderID: string) {
+    return this.afs.collection(this.cartColl)
+      .doc(cartID).
+      collection(this.orderSubColl)
+      .doc<ICartDoc>(orderID).valueChanges();
+  }
+
   getAllItems$(cartID: string, orderID: string): Observable<ICartItem[]> {
     return this.afs
       .collection(this.cartColl).doc(cartID)
@@ -205,6 +212,7 @@ export class AppCartService {
             items: items,
             checkedOutAt: new Date()
           };
+          console.log('checkedoutOrder: ', checkedoutOrder);
           return checkedoutOrder;
         } )
       );

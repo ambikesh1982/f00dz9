@@ -1,0 +1,47 @@
+<div *ngIf="order$|async as order">
+  <mat-card mat-elevation="4">
+    
+    <mat-card-content>
+      <app-cart-list [cartID]="cartID" [orderID]="order.id" (orderUpdate)="updateOrder($event)">
+      </app-cart-list>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <h3>Payment Option</h3>
+    <div *ngIf="order.paymentOption=='online'">
+      <p>Payment option is {{order.paymentOption}}</p>
+    </div>
+    <div *ngIf="order.paymentOption=='cashOnDelivery'">
+      <p>Payment option is {{order.paymentOption}}</p>
+    </div>
+    <mat-divider></mat-divider>
+
+    <h3>Delivery Option</h3>
+    <div *ngIf="order.deliveryOption=='takeAway'">
+      <p>Delivery option is {{order.deliveryOption}}</p>
+    </div>
+    <div *ngIf="order.deliveryOption=='homeDelivery'">
+      <p>Delivery option is {{order.deliveryOption}}</p>
+    </div>
+    <div *ngIf="order.deliveryOption=='dinein'">
+      <p>Delivery option is {{order.deliveryOption}}</p>
+    </div>
+    <mat-divider></mat-divider>
+
+    <p>Served by: {{order.name}}</p>
+    <p>Amount Payable: SGD {{order.amtPayable}}</p>
+    <p>Discount: SGD {{order.discount}}</p>
+    
+    <h3>Order Summary</h3>
+    <p>{{order|json}}</p>
+
+    <mat-card-actions align="right">
+      <button mat-mini-fab color="primary" (click)="onClickCheckout(order)">
+        <mat-icon>done</mat-icon>
+      </button>
+    </mat-card-actions>
+
+    <mat-divider></mat-divider>
+  </mat-card>
+</div>

@@ -5,6 +5,7 @@ import { CheckoutService } from '../checkout.service';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { DialogCancellationComponent, DialogData } from '../dialog-cancellation/dialog-cancellation.component';
+import { first } from '../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-orderl-list',
@@ -78,7 +79,7 @@ export class OrderlListComponent implements OnInit, OnChanges {
       data: <DialogData>{ userAction: 'CANCEL' }
     });
 
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
+    dialogRef.afterClosed().pipe(first()).subscribe((data: DialogData) => {
       if (data) {
         const orderState = this.prepareOrderState('Cancelled', data.reason, data.additionalComments);
         this.checkoutService.updateOrderState(id, orderState);
@@ -93,7 +94,7 @@ export class OrderlListComponent implements OnInit, OnChanges {
       data: <DialogData>{ userAction: 'REJECT' }
     });
 
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
+    dialogRef.afterClosed().pipe(first()).subscribe((data: DialogData) => {
       if (data) {
         const orderState = this.prepareOrderState('Rejected', data.reason, data.additionalComments);
         this.checkoutService.updateOrderState(id, orderState);
