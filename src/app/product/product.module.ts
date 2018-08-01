@@ -16,6 +16,7 @@ import { ManageComponent } from './manage/manage.component';
 import { Form1Component } from './manage/product-form/form1/form1.component';
 import { Form2Component } from './manage/product-form/form2/form2.component';
 import { DialogService } from '../core/dialog.service';
+import { AuthSocialGuard } from '../core/auth-social.guard';
 
 
 const productRoutes: Routes = [
@@ -24,8 +25,8 @@ const productRoutes: Routes = [
     component: ManageComponent,
     data: { title: 'PRODUCT_MANAGE_PAGE' },
     resolve: { product: ProductResolver },
+    canActivate: [AuthSocialGuard],
     canDeactivate: [CanDeactivateGuard],
-    canActivate: [AuthGuard]
   },
   {
     path: 'detail/:id',
@@ -38,8 +39,9 @@ const productRoutes: Routes = [
     path: '',
     component: ListComponent,
     data: { title: 'PRODUCT_LIST_PAGE' },
+    canActivate: [AuthGuard]
     // resolve: { products: ProductListResolver}
-  },
+  }
 ];
 
 @NgModule({

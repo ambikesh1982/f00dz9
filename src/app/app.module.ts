@@ -23,6 +23,7 @@ import { CanDeactivateGuard } from './core/can-deactivate-guard';
 import { LocationService } from './core/location.service';
 import { AppCartService } from './app-cart/app-cart.service';
 import { ChatService } from './app-chat/chat.service';
+import { AuthSocialGuard } from './core/auth-social.guard';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ChatService } from './app-chat/chat.service';
     LayoutService,
     DataService,
     AuthGuard,
+    AuthSocialGuard,
     ProductResolver,
     ScriptLoadService,
     LocationService,

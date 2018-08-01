@@ -114,6 +114,11 @@ export class LocationService {
 
     });
   }
+
+  generateGeoHash(lat: string, lng: string): string {
+    return 'wwww22222';
+  }
+
 }
 
 

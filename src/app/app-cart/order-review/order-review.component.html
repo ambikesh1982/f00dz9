@@ -23,6 +23,7 @@
     </div>
     <div *ngIf="order.deliveryOption=='homeDelivery'">
       <p>Delivery option is {{order.deliveryOption}}</p>
+      <app-user-address [userGeo]="me.geoInfo" (geoInfo)="geoInfoFromUser($event)"></app-user-address>
     </div>
     <div *ngIf="order.deliveryOption=='dinein'">
       <p>Delivery option is {{order.deliveryOption}}</p>

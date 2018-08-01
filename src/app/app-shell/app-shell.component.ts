@@ -33,7 +33,7 @@ export class AppShellComponent implements OnInit {
       map(
         user => {
           if (user != null) {
-            console.log('Current User Logged-in user >>>> ', user);
+            console.log('Logged-in user >>>> ', user);
             return user;
           } else {
             console.log('### User not found - Creating new anonymous user ###');

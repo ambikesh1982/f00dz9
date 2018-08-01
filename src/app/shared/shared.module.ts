@@ -7,11 +7,14 @@ import { AppToolbarComponent } from './app-toolbar/app-toolbar.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { FabActionComponent } from './fab-action/fab-action.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { UserAddressComponent } from './user-address/user-address.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const SHARED_COMPONENTS = [
   AppToolbarComponent,
   FabActionComponent,
   ProductCardComponent,
+  UserAddressComponent,
 ];
 
 @NgModule({
@@ -19,6 +22,7 @@ const SHARED_COMPONENTS = [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule,
   ],
   declarations: [
@@ -26,6 +30,7 @@ const SHARED_COMPONENTS = [
     FabActionComponent,
     ProductCardComponent,
     DialogComponent,
+    UserAddressComponent,
   ],
   exports: [
     SHARED_COMPONENTS

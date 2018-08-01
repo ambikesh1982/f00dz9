@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from './core/auth.service';
-import { LayoutService } from './core/layout.service';
 import { AppUser } from './core/models';
 
 @Component({
@@ -21,11 +20,11 @@ export class AppComponent implements OnInit, OnDestroy {
   currentUser: Observable<AppUser>;
   subscription: Subscription;
 
-  constructor(private router: Router, private layoutService: LayoutService, private auth: AuthService) {
+  constructor(private router: Router, private auth: AuthService) {
     // this.auth.signOut();
     this.loading = true;
 
-    this.subscription = router.events.subscribe(routerEvent => {
+    this.subscription = this.router.events.subscribe(routerEvent => {
       this.checkRouterEvent(routerEvent);
     });
   }

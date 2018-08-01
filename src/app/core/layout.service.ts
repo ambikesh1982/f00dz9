@@ -17,7 +17,6 @@ export interface AppToolbar {
 export class LayoutService {
 
   defaultToolbar: AppToolbar = {
-    pageTitle: 'Foodz9',
     showSideNavToggleIcon: true,
     showNewProductIcon: true,
     showAppTrayIcon: true,

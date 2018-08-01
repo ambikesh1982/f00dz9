@@ -132,7 +132,7 @@ export class DataService {
     console.log('User dataservice: ', user);
     const promise = this.appUserRef.doc(user.uid).set(user);
     await promise.then(res => {
-      console.log('saveUserDataToFirebase(user): ', user);
+      console.log('saveUserDataToFirebase(user): ', res);
       console.log('New User Saved!!');
     }, err => {
       console.log('Error during create User: ', err);
