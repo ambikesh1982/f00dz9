@@ -8,15 +8,16 @@
     <h3>Find the food served by home chefs in our neighbourhood!</h3>
     <!-- <br> -->
 
-    <!-- <app-user-address [userGeo]="userGeo" (geoInfo)="geoInfoFromUser($event)"></app-user-address> -->
+    <app-user-address [userId]="userId" (geoInfo)="geoInfoFromUser($event)"></app-user-address>
 
     <!-- <mat-form-field style="width: 100%" appearance="outline">
       <mat-label>Tell us your location!</mat-label>
       <input matInput type="text" required />
     </mat-form-field> -->
 
-    <mat-card-actions align="right">
-      <a mat-icon-button routerLink="/">
+    <mat-card-actions align="right"> 
+      <!-- <a mat-icon-button routerLink="/"> -->
+      <a mat-icon-button (click)="navigateToList()">
         <mat-icon color="primary" style="font-size: 48px; margin-right: 24px">arrow_forward</mat-icon>
       </a>
     </mat-card-actions>

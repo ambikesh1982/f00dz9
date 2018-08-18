@@ -16,7 +16,8 @@ import * as firebase from 'firebase';
 import { Observable, Subscription } from 'rxjs';
 import { LocationService } from '../../core/location.service';
 import { AppUser, IGeoInfo } from '../../core/models';
-import { last } from '../../../../node_modules/@angular/router/src/utils/collection';
+import { DataService } from '../../core/data.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-address',
@@ -25,8 +26,10 @@ import { last } from '../../../../node_modules/@angular/router/src/utils/collect
 })
 export class UserAddressComponent
   implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-  @Input() userGeo: IGeoInfo;
+
+  @Input() userId: string;
   @Output() geoInfo = new EventEmitter<IGeoInfo>();
+
   @ViewChild('addessSearch') searchElm: ElementRef;
   @ViewChild('gmap') mapElm: ElementRef;
 
@@ -39,23 +42,34 @@ export class UserAddressComponent
   constructor(
     private locationService: LocationService,
     private formBuilder: FormBuilder,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private dataService: DataService
   ) {
     this.createForm();
     this.locationService.loadGoogleMapScript();
   }
 
   ngOnChanges() {
-    if (this.userGeo) {
-      console.log('User GeoInfo from Firebase: ', this.userGeo);
-      this.patchFormValue(this.userGeo);
+    if (this.userId) {
+      console.log('ngOnChanges(): if (this.userId)', this.userId);
+      this.dataService.getUserFromFirestore(this.userId).pipe(
+        first()
+      ).subscribe( user => {
+        if (user && user.geoInfo) {
+          console.log('TODO: this.patchFormValue(user.geoInfo);', user.geoInfo);
+          this.patchFormValue(user.geoInfo);
+          this.geoInfo.emit(user.geoInfo);
+        } else {
+          console.log('TODO: No geoInfo. Show dialog box.');
+        }
+      });
     } else {
-      console.log('No User GeoInfo from Firebase: ');
-      console.log('TODO: Get auto address and save to user profile');
+      console.log('ngOnChanges(): else', this.userId);
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   createForm() {
     this.addressForm = this.formBuilder.group({
@@ -81,7 +95,6 @@ export class UserAddressComponent
     this.subscription = this.locationService.isGoogle$.subscribe(
       google => {
       if (google) {
-        console.log('##### Google-maps api loaded #####');
 
         const autoComplete = new google.places.Autocomplete(this.searchElm.nativeElement /*, {types: ['geocode']}*/);
 

@@ -1,5 +1,5 @@
   import { Component, OnInit, Input} from '@angular/core';
-  import { ChatMessage, Fooditem, ChatRoomInfo } from '../../core/models';
+  import { ChatMessage, Fooditem, ChatRoomInfo, AppUser } from '../../core/models';
   import { Observable } from 'rxjs';
   import { ActivatedRoute } from '@angular/router';
   import { AuthService } from '../../core/auth.service';
@@ -22,12 +22,14 @@
     private fooditem: Fooditem;
     isBuyer: boolean;
     isSeller: boolean;
+    currentUser: AppUser;
 
     constructor(private route: ActivatedRoute,
       private chatService: ChatService,
       private authService: AuthService
 
     ) {
+      this.currentUser = this.authService.currAppUser;
       this.newChatMessage = {};
       // this.roomMessages = [];
       this.isBuyer = false;
@@ -44,7 +46,7 @@
     }
 
     isBuyerSeller() {
-      if (this.authService.currUserID === this.fooditem.createdBy.id) {
+      if (this.authService.currentUserId === this.fooditem.createdBy.id) {
         this.isSeller = true;
       } else {
         this.isBuyer = true;
@@ -57,16 +59,17 @@
       event.stopPropagation();
 
       this.newChatMessage.message = this.inputMessageText;
-      this.newChatMessage.createdByUserId = this.authService.currUserID;
+      this.newChatMessage.createdByUserId = this.authService.currentUserId;
       this.isBuyerSeller();
 
-          const chatroomName = this.fooditem.id + this.authService.currUserID;
-          this.chatRoomInfo = { buyerID:    this.authService.currUserID,
-                                buyerName: this.authService.currUserName,
-                                sellerID:   this.fooditem.createdBy.id,
-                                fooditemID: this.fooditem.id,
-                                roomID:     chatroomName,
-                                imageURL:   this.fooditem.images[0].url};
+          const chatroomName = this.fooditem.id + this.authService.currentUserId;
+          this.chatRoomInfo = {
+            buyerID:    this.authService.currentUserId,
+            buyerName: this.currentUser.displayName,
+            sellerID:   this.fooditem.createdBy.id,
+            fooditemID: this.fooditem.id,
+            roomID:     chatroomName,
+            imageURL:   this.fooditem.images[0].url};
 
       console.log('chat-message buyer + fooditem id', chatroomName);
       this.chatService.createChatMessages(this.newChatMessage, this.chatRoomInfo, this.isBuyer);
@@ -77,7 +80,7 @@
     }
 
     getChatbyQuery() {
-      const buyerid = this.authService.currUserID;
+      const buyerid = this.authService.currentUserId;
       const chatroomName = this.fooditem.id + buyerid;
       const sellerid = this.fooditem.createdBy;
 

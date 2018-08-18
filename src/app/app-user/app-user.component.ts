@@ -19,9 +19,10 @@
     roomMetaData: Observable<ChatRoomInfo[]>;
     fooditems$: Observable<Fooditem>;
     chatMessages$: Observable<any>;
-    constructor(private authService: AuthService,
-                private dataService: DataService,
-                private chatService: ChatService ) {
+    constructor(private authService: AuthService, private chatService: ChatService ) {
+      this.user = this.authService.currUser$.pipe(
+        tap( u => this.userid = u.uid)
+      );
     }
 
     getMessage(chatroom: ChatRoomInfo) {
@@ -31,13 +32,6 @@
 
 
     ngOnInit() {
-      this.userid = this.authService.currUserID;
-      console.log(this.userid);
-        this.user = this.dataService.getUserFromFirestore(this.userid);
-        this.user.subscribe(user => {
-        const name = user.displayName;
-        const url = user.photoURL;
         this.ChatMetaData$ = this.chatService.getChatRoomMetaData(this.userid);
-    });
   }
   }

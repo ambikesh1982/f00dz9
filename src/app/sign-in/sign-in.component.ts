@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
   }
 
   loginGoogle() {
-    this.auth.loginGogle().then(
+    this.auth.loginGoogle().then(
       res => {
         this.router.navigateByUrl(this.returnURL);
       }

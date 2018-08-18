@@ -123,7 +123,7 @@ export class DataService {
 
   // <AppUser...>
 
-  getUserFromFirestore(uid: string) {
+  getUserFromFirestore(uid: string): Observable<AppUser> {
     const appUserPath = `${this.appUserPath}/${uid}`;
     return this.afs.doc<AppUser>(appUserPath).valueChanges();
   }

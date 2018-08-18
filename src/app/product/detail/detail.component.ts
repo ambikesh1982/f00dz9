@@ -55,7 +55,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   onClickFab(action: string) {
     switch (action) {
       case 'add':
-        this.cartService.manageProduct(this.auth.currAppUser.uid, this.fooditem);
+        console.log('case: add:', this.auth.currentAppUser);
+        this.cartService.manageProduct(this.auth.currentAppUser.uid, this.fooditem);
         this.router.navigate(['app-cart']);
         break;
       case 'edit':

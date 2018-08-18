@@ -7,45 +7,41 @@ import { first, switchMap, tap } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { AppUser } from './models';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
 
-  private _appUser$: Observable<firebase.User>;
-  private _appUser: firebase.User;
   currUser: firebase.User;
 
   currUser$: Observable<AppUser | null>; // Use this in other component't template.
   currAppUser: AppUser|null;
 
-  currUserID: string;
-  currUserName: string;
+
 
   constructor(public afAuth: AngularFireAuth, private dataService: DataService) {
     this.currUser$ = this.afAuth.authState.pipe(
       switchMap( user => {
         if (user) {
-          console.log('### Retrieving user from firestore ###');
-          this.currUserID = user.uid;
-          this.currUserName = user.displayName;
-          this.currUser = user;
-          return this.dataService.getUserFromFirestore(user.uid).pipe(
+          return this.dataService.getUserFromFirestore(user.uid)
+          .pipe(
             first(),
-            tap( currAppUser => {
-              this.currAppUser = currAppUser;
-              this.currUserName = currAppUser.displayName;
-            }),
+            tap( cu => this.currAppUser = cu ),
           );
         } else {
           return of(null);
         }
       })
     );
+  }
+
+  get currentAppUser(): AppUser {
+    return this.currAppUser;
+  }
+
+  get currentUserId() {
+    return this.currAppUser.uid;
   }
 
   loginAnonymously(): Promise<void> {
@@ -71,11 +67,7 @@ export class AuthService {
         });
   }
 
-  get currentUser() {
-    return this.currUser;
-  }
-
-  loginGogle() {
+  loginGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
       return this.oAuthLogin(provider);
   }

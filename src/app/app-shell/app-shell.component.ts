@@ -56,7 +56,7 @@ export class AppShellComponent implements OnInit {
   }
 
   loginGoogle() {
-    this.auth.loginGogle();
+    this.auth.loginGoogle();
   }
 
   signOut() {
