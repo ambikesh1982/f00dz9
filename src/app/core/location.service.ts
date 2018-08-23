@@ -6,6 +6,8 @@ import { IGeoInfo } from './models';
 import { ScriptLoadService } from './script-load.service';
 import { } from 'googlemaps';
 
+export const g_BASE32 = '0123456789bcdefghjkmnpqrstuvwxyz';
+
 const GEOLOCATION_ERRORS = {
   'errors.location.unsupportedBrowser': 'Browser does not support location services',
   'errors.location.permissionDenied': 'You have rejected access to your location',
@@ -115,8 +117,41 @@ export class LocationService {
     });
   }
 
-  generateGeoHash(lat: string, lng: string): string {
-    return 'wwww22222';
+  generateGeoHash(lat, lng): string {
+    const latitudeRange = { min: -90, max: 90 };
+    const longitudeRange = { min: -180, max: 180 };
+    const precision = 12;
+
+    let hash = '';
+    let hashVal = 0;
+    let bits = 0;
+    let even: number | boolean = 1;
+
+    while (hash.length < precision) {
+      const val = even ? lng : lat;
+      const range = even ? longitudeRange : latitudeRange;
+      const mid = (range.min + range.max) / 2;
+
+      if (val > mid) {
+        // tslint:disable-next-line:no-bitwise
+        hashVal = (hashVal << 1) + 1;
+        range.min = mid;
+      } else {
+        // tslint:disable-next-line:no-bitwise
+        hashVal = (hashVal << 1) + 0;
+        range.max = mid;
+      }
+
+      even = !even;
+      if (bits < 4) {
+        bits++;
+      } else {
+        bits = 0;
+        hash += g_BASE32[hashVal];
+        hashVal = 0;
+      }
+    } // while
+    return hash;
   }
 
 }
