@@ -14,10 +14,10 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Observable, Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { DataService } from '../../core/data.service';
 import { LocationService } from '../../core/location.service';
 import { AppUser, IGeoInfo } from '../../core/models';
-import { DataService } from '../../core/data.service';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-address',
@@ -110,7 +110,11 @@ export class UserAddressComponent
               console.log('UserGeoHash >>>>> ', userGeoHash);
               const geoPoint = new firebase.firestore.GeoPoint(userLat, userLng);
 
-              const userGeoInfo: IGeoInfo = <IGeoInfo>{ coordinates: geoPoint, autoAddressFromMap: place.formatted_address };
+              const userGeoInfo: IGeoInfo = <IGeoInfo>{
+                geoHash: userGeoHash,
+                coordinates: geoPoint,
+                autoAddressFromMap: place.formatted_address
+              };
 
               this.geoInfo.emit(userGeoInfo);
             } else {

@@ -51,6 +51,7 @@ export interface AppUser {
 // 23.135469 83.18172000000004
 
 export interface IGeoInfo {
+    geoHash?: string;
     coordinates?: firebase.firestore.GeoPoint;
     autoAddressFromMap?: string;
     addressFromUser?: string;
