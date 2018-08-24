@@ -17,12 +17,12 @@ export class AppShellComponent implements OnInit {
 
   navList = [
     { menuIcon: 'home', menuName: 'Home', menuRoute: '/home' },
-    { menuIcon: 'order', menuName: 'My Orders', menuRoute: '/checkout' },
-    { menuIcon: 'cart', menuName: 'Cart', menuRoute: '/app-cart' },
-    { menuIcon: 'heart', menuName: 'Wish List', menuRoute: '/wishlist' },
-    { menuIcon: 'user', menuName: 'Profile', menuRoute: '/app-user' },
+    { menuIcon: 'assignment', menuName: 'My Orders', menuRoute: '/checkout' },
+    { menuIcon: 'shopping_cart', menuName: 'Cart', menuRoute: '/app-cart' },
+    { menuIcon: 'favorite', menuName: 'Wish List', menuRoute: '/wishlist' },
+    { menuIcon: 'account_circle', menuName: 'Profile', menuRoute: '/app-user' },
     { menuIcon: 'language', menuName: 'Language', menuRoute: './' },
-    { menuIcon: 'download', menuName: 'Download App', menuRoute: './' },
+    { menuIcon: 'android', menuName: 'Download App', menuRoute: './' },
     { menuIcon: 'help', menuName: 'Help', menuRoute: './' },
     { menuIcon: 'feedback', menuName: 'Feedback', menuRoute: './' },
 

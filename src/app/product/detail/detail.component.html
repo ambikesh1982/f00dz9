@@ -5,11 +5,11 @@
     </button>
   </div> -->
 
-  <div>
-    <mat-card *ngIf="fooditem as fi" style="max-width:380px; padding-bottom: 0">
+
+    <mat-card *ngIf="fooditem as fi" fxFlex="0 1 48" fxFlex.lg="0 1 32" fxFlexOrder.xs="2">
 
       <div *ngIf="preview">
-        <img mat-card-image [src]="preview" style="height: 220px">
+        <img mat-card-image [src]="preview">
 
         <mat-grid-list *ngIf="fooditemImageCount > 1" cols="4">
           <mat-grid-tile *ngFor="let img of fi.images">
@@ -34,30 +34,30 @@
         <h3>Availability: [{{ fi.availability }}]</h3>
 
       </mat-card-content>
-
+      <span class="spacer"></span>
       <div fxLayout="row wrap">
-        <h3>
+        <h5>
           <mat-icon>room_service</mat-icon>
-        </h3>
-        <h3>{{fi.serving}} persons</h3>
+        </h5>
+        <h5>{{fi.serving}} persons</h5>
 
         <span class="spacer"></span>
 
-        <h3>
+        <h5>
           <mat-icon>schedule</mat-icon>
-        </h3>
-        <h3> {{fi.orderTime}} {{fi.orderType == 'instant'? 'minutes':'hours'}} </h3>
+        </h5>
+        <h5> {{fi.orderTime}} {{fi.orderType == 'instant'? 'minutes':'hours'}} </h5>
 
         <span class="spacer"></span>
 
-        <h3>
+        <h5>
           <mat-icon>place</mat-icon>
-        </h3>
-        <h3>1.0 km</h3>
+        </h5>
+        <h5>1.0 km</h5>
       </div>
 
     </mat-card>
-  </div>
+ 
 
 
   <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 32" fxFlexOrder.xs="2">

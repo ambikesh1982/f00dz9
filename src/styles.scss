@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+$white:#FFF;
+$green:#00b279;
+$orange:#f75d34;
+
 * {
   font-weight: normal;
 }
@@ -16,9 +20,6 @@ app-toolbar {
   width: 100%;
 }
 
-mat-card {
-  max-width: 500px;
-}
 
 app-fab-action {
   position: fixed;
@@ -29,4 +30,40 @@ app-fab-action {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.headerTop{ background:$white;}
+.mat-drawer-container{background: #e9ebee;}
+.pageContainer{ margin-top: 60px;}
+.productBox{border: 1px solid #dddfe2;border-radius:3px !important;-webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;box-shadow: none !important;margin-bottom:15px;padding-bottom: 0px !important;}
+.productBox .productName{ margin-top: 6px; font-weight: bold; font-size: 16px;}
+.productBox .mat-card-content h4{  margin-top: 0px;margin-bottom: 5px;}
+.productBox .mat-card-content h4:last-child{margin-bottom: 5px;}
+.productBox>:last-child:not(.mat-card-footer){border-top: 1px solid #e5e5e5;}    
+.productImg .mat-card-image{ max-height: 200px; overflow: hidden;}
+.price{position: absolute;top: 0px;left: -8px; padding: 6px 12px;
+    background: rgba(0,0,0,0.85); color: $white;font-weight:bold;
+    border-color: rgb(30, 32, 35) transparent;
+}
+.price:before {
+      position: absolute;
+      bottom: -9px;
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: inherit;
+      left: 0;
+      border-width: 9px 0 0 9px;
+  }    
+
+button i{ display: inline-block; vertical-align: middle;}
+.user-card{ text-align: center;}
+.sidenav{width:300px !important;}
+.user-card{background: $orange !important; color:$white !important;padding: 15px 24px !important;}
+.nav-list .mat-icon{background: $orange; color:$white; margin-right: 20px;text-align: center;
+  font-size: 20px !important; line-height: 25px;}
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: 50px !important;
 }

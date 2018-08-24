@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" *ngIf="user|async as user">
-            <mat-card style="max-width:380px; padding-bottom: 0">
+            <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 32">
                 <span class="spacer"></span>
                 <img  class = "center" mat-card-image src= {{user.photoURL}}>
                 <div fxLayout="row wrap">
@@ -9,8 +9,7 @@
                     <mat-card-subtitle>Speciality - North Indian Cuisines </mat-card-subtitle>
                 </div>
         </mat-card>
-        <span class="spacer"></span>
-        <mat-card style="max-width:380px; padding-bottom: 0">
+        <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 32">
             <mat-card-title>
                 <h3>Contacts</h3>
             </mat-card-title>
@@ -29,7 +28,7 @@
                 <span class="spacer"></span>
             </div>
         </mat-card>
-        <mat-card style="max-width:380px; padding-bottom: 0">
+        <mat-card fxFlex="0 1 97.5" fxFlex.lg="0 1 32">
             <mat-card-title>
                 <h3>Products & Likes</h3>
             </mat-card-title>

@@ -1,7 +1,6 @@
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around stretch">
   <app-product-card 
-    fxFlex="0 1 48" 
-    fxFlex.lg="0 1 32" 
+    fxFlex="0 1 48" fxFlex.lg="0 1 32" 
     *ngFor="let fooditem of fooditems|async" 
     [fooditem]="fooditem" 
     routerLink="/detail/{{fooditem.id}}">

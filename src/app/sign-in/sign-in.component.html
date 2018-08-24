@@ -1,7 +1,6 @@
 <mat-card 
   *ngIf="(currentUser$|async) as currentUser; else notLogedIn" 
-  class="user-card" 
-  style="background-color: orange">
+  class="user-card" >
 
   <div *ngIf="currentUser.isAnonymous else registeredUser">
       <button mat-raised-button color="primary" (click)="loginGoogle()">
@@ -24,7 +23,7 @@
 
 <!-- Template for Not logged-in User -->
 <ng-template #notLogedIn>
-  <mat-card class="user-card" style="background-color: orange">
+  <mat-card class="user-card">
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="loginGoogle()">
         Sign in with Google
