@@ -28,7 +28,7 @@
       <span class="spacer"></span>
 
       <div *ngIf="order.currState.state=='Awaiting_Confirmation'">
-        <button mat-icon-button (click)="rejectOrder(order.id)">
+        <button mat-icon-button (click)="sellerView?rejectOrder(order.id):cancelOrder(order.id)">
           <mat-icon color="warn">clear</mat-icon> 
         </button>
         <button mat-icon-button *ngIf="sellerView" (click)="confirmOrder(order.id)">
