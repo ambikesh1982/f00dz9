@@ -16,14 +16,14 @@
                     [orderID]="order.id" 
                     (orderUpdate)="updateOrder($event)">
                 </app-cart-list>
-
-                <mat-card-actions align="right">
-                    <button 
-                        mat-mini-fab color="primary" 
-                        (click)="onClickCheckout(order.id, order.name)">
-                        <mat-icon>done</mat-icon>
-                    </button>
-                </mat-card-actions>
+                
+                    <mat-card-actions align="end" class="m15lr">
+                        <button  mat-raised-button
+                            color="primary" 
+                            (click)="onClickCheckout(order.id, order.name)">
+                            Place Order
+                        </button>
+                    </mat-card-actions>
 
                 <mat-divider></mat-divider>
             </mat-card>

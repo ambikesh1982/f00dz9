@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { SearchComponent } from './search.component';
+import { TrimpipePipe } from './trimpipe.pipe';
 
 const appSearchRoutes: Routes = [
   { path: '', component: SearchComponent, data: {title: 'APP_SEARCH_PAGE'} }
@@ -18,6 +19,6 @@ const appSearchRoutes: Routes = [
     RouterModule.forChild(appSearchRoutes),
     SharedModule
   ],
-  declarations: [SearchComponent]
+  declarations: [SearchComponent, TrimpipePipe]
 })
 export class AppSearchModule { }

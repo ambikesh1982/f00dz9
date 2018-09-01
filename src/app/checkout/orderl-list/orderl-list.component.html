@@ -12,11 +12,13 @@
         <p mat-line> {{item.qty}} items x SGD {{item.price}} = SGD {{item.price * item.qty}}</p>
       </mat-list-item>
     </mat-list>
-
-    <mat-card-actions fxLayout="row" align="right">
-
-      <div *ngIf="order.currState">
-        <h3>
+    <mat-divider></mat-divider>
+    <h3 class="greyTitle">Order Status</h3>
+        <h3>Your order is sent. Waiting for them to confirm that they can deliver.</h3>
+    <mat-card fxLayout="row" align="right">
+        
+      <div *ngIf="order.currState">        
+        <h3 class="m0tb">
           <span>{{order.currState.state}}</span>
           <span *ngIf="order.currState.reason">: [{{CancellationReasons[order.currState.reason]}}]</span>
         </h3>
@@ -27,9 +29,9 @@
 
       <div *ngIf="order.currState.state=='Awaiting_Confirmation'">
         <button mat-icon-button (click)="rejectOrder(order.id)">
-          <mat-icon color="accent">clear</mat-icon>
+          <mat-icon color="warn">clear</mat-icon> 
         </button>
-        <button *ngIf="sellerView" mat-icon-button (click)="confirmOrder(order.id)">
+        <button mat-icon-button *ngIf="sellerView" (click)="confirmOrder(order.id)">
           <mat-icon color="primary">done</mat-icon>
         </button>
       </div>
@@ -38,7 +40,7 @@
         <mat-icon color="accent">chat_bubble_outline</mat-icon>
       </button>
 
-    </mat-card-actions>
+    </mat-card>
 
   </mat-card>
   <!-- <mat-divider></mat-divider> -->

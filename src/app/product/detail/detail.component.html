@@ -36,24 +36,24 @@
       </mat-card-content>
       <span class="spacer"></span>
       <div fxLayout="row wrap">
-        <h5>
+        <h3>
           <mat-icon>room_service</mat-icon>
-        </h5>
-        <h5>{{fi.serving}} persons</h5>
+        </h3>
+        <h3>{{fi.serving}} persons</h3>
 
         <span class="spacer"></span>
 
-        <h5>
+        <h3>
           <mat-icon>schedule</mat-icon>
-        </h5>
-        <h5> {{fi.orderTime}} {{fi.orderType == 'instant'? 'minutes':'hours'}} </h5>
+        </h3>
+        <h3> {{fi.orderTime}} {{fi.orderType == 'instant'? 'minutes':'hours'}} </h3>
 
         <span class="spacer"></span>
 
-        <h5>
+        <h3>
           <mat-icon>place</mat-icon>
-        </h5>
-        <h5>1.0 km</h5>
+        </h3>
+        <h3>1.0 km</h3>
       </div>
 
     </mat-card>
@@ -94,10 +94,10 @@
   <mat-card fxFlex="0 1 48" fxFlex.lg="0 1 98" fxFlexOrder.xs="3">
     <mat-card-header>
       <div mat-card-avatar [style.background-image]="'url('+ fi.images[0] +')'" [style.background-size]="'cover'"></div>
-      <mat-card-title>Ambikesh</mat-card-title>
-      <mat-card-subtitle>{{fi.autoAddressFromMap}}</mat-card-subtitle>
+      <mat-card-title><h3>Ambikesh</h3></mat-card-title>
+      <mat-card-subtitle><h3>{{fi.autoAddressFromMap}}</h3></mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>Hello food lover! Serving you authentic north indian food. Please check my other food posts as well.</mat-card-content>
+    <mat-card-content><h3>Hello food lover! Serving you authentic north indian food. Please check my other food posts as well.</h3></mat-card-content>
     <h3>More from Ambikesh</h3>
 
     <!-- <mat-grid-list cols="3">

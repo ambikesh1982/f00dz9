@@ -8,7 +8,7 @@
 
     <mat-divider></mat-divider>
 
-    <h3>Payment Option</h3>
+    <h3 class="greyTitle">Payment Option</h3>
     <div *ngIf="order.paymentOption=='online'">
       <p>Payment option is {{order.paymentOption}}</p>
     </div>
@@ -17,7 +17,7 @@
     </div>
     <mat-divider></mat-divider>
 
-    <h3>Delivery Option</h3>
+    <h3 class="greyTitle">Delivery Option</h3>
     <div *ngIf="order.deliveryOption=='takeAway'">
       <p>Delivery option is {{order.deliveryOption}}</p>
     </div>
@@ -29,17 +29,17 @@
       <p>Delivery option is {{order.deliveryOption}}</p>
     </div>
     <mat-divider></mat-divider>
-
+    <h3 class="greyTitle">Order Summary</h3>
     <p>Served by: {{order.name}}</p>
     <p>Amount Payable: SGD {{order.amtPayable}}</p>
     <p>Discount: SGD {{order.discount}}</p>
     
-    <h3>Order Summary</h3>
+    
     <p>{{order|json}}</p>
 
-    <mat-card-actions align="right">
-      <button mat-mini-fab color="primary" (click)="onClickCheckout(order)">
-        <mat-icon>done</mat-icon>
+    <mat-card-actions align="end" class="m15lr">
+        <button  mat-raised-button color="primary" (click)="onClickCheckout(order)">
+        Order Now
       </button>
     </mat-card-actions>
 

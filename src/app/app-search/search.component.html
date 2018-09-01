@@ -5,22 +5,25 @@
   <app-show-gmap [lat]="locationFromNavigator.lat" [lng]="locationFromNavigator.lng"></app-show-gmap> -->
   
   <mat-card>
+    <h3 class="greyTitle">Select Food Type</h3>
     <mat-slide-toggle fxFlex="0 1 48" matInput>Veg / Non-Veg</mat-slide-toggle>
 
     <mat-grid-list cols="3" gutterSize="1px">
-      <mat-grid-tile>Top Rated</mat-grid-tile>
-      <mat-grid-tile>New*</mat-grid-tile>
-      <mat-grid-tile>Ready 2 eat</mat-grid-tile>
+      <mat-grid-tile class="cat">Top Rated</mat-grid-tile>
+      <mat-grid-tile class="cat">New*</mat-grid-tile>
+      <mat-grid-tile class="cat">Ready 2 eat</mat-grid-tile>
     </mat-grid-list>
 
-     Browse by Category
+    <h3 class="greyTitle">Browse by Category</h3>
     <mat-grid-list cols="3" gutterSize="1px">
       <mat-grid-tile 
         *ngFor="let cuisine of cuisines" 
-        style="background:turquoise;"
+        class="cat"
         #checked
         (click)="(checked == true)">
-        {{cuisine}}
+        <img src="assets/{{cuisine|trimpipe}}.jpg" />
+        <div class="overlay"></div>
+        <span>{{cuisine}}</span>
         <mat-grid-tile-header *ngIf="checked == true" style="background-color: turquoise">
           <mat-checkbox></mat-checkbox>
         </mat-grid-tile-header>

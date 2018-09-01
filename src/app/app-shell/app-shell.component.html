@@ -22,11 +22,11 @@
       <ng-template #registeredUser>
         <mat-card-title>{{currentUser.displayName}}</mat-card-title>
 
-        <mat-card-actions>
+        
           <button mat-raised-button color="primary" (click)="sidenav.close() && signOut()">
             Sign-out
           </button>
-        </mat-card-actions>
+       
       </ng-template>
 
     </mat-card>
@@ -55,7 +55,6 @@
       <a mat-list-item *ngFor="let navItem of navList" [routerLink]="navItem.menuRoute" (click)="sidenav.close()">
         <mat-icon matListIcon>{{navItem.menuIcon}}</mat-icon>
         {{navItem.menuName}}
-        <mat-divider></mat-divider>
       </a>
     </mat-nav-list>
 
