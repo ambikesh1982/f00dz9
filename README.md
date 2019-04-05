@@ -42,3 +42,24 @@ order state interface:
     reason?: string;
     additionalComments?: string;
 }
+
+
+Folder structure -
+Feature modules-
+1. Product( List/Detail/Manage )
+2. Users( Detail/Manage )
+3. Tray( List/Detail )
+4. Chat 
+5. Search
+6. Sign-In
+7. Checkout
+8. Admin
+
+Layout Modules
+1. Home
+2. PageNotFound
+3. ToolBar
+4. Confimation-Dialog
+5. Fab-Action
+
+

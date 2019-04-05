@@ -39,7 +39,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.imageUploadCompleted = false;
     this.canNavigateAway = false;
 
-    this.currentAppUser = this.auth.currAppUser;
+    this.currentAppUser = this.auth.currentAppUser;
 
     this.createForm();
 
